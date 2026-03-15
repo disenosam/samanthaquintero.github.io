@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samantha Quintero &middot; Digital Design &amp; Marketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--cream:#f4f1ec;--black:#111111;--sand:#d8cfc4;--taupe:#8c7f74;--stone:#a9a29a;--serif:"Cormorant Garamond",serif;--sans:"Jost",sans-serif}
+    html{scroll-behavior:smooth}
+    body{background:var(--cream);color:var(--black);font-family:var(--sans);font-weight:300;overflow-x:hidden;transition:opacity .2s}
+    body.switching{opacity:0}
+    nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 3.5rem;background:var(--cream);border-bottom:.5px solid var(--sand)}
+    .logo{font-family:var(--serif);font-size:1.15rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase}
+    .nav-right{display:flex;align-items:center;gap:2.5rem}
+    .nav-links{display:flex;gap:2.5rem}
+    .nav-links a{text-decoration:none;color:var(--stone);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;font-weight:300;transition:color .3s}
+    .nav-links a:hover{color:var(--black)}
+    .lang-toggle{display:flex;align-items:center;border:.5px solid var(--sand);border-radius:2px;overflow:hidden}
+    .lang-toggle button{background:transparent;border:none;cursor:pointer;font-family:var(--sans);font-size:.55rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;padding:.4rem .8rem;color:var(--stone);transition:background .2s,color .2s}
+    .lang-toggle button.active{background:var(--black);color:var(--cream)}
+    .lang-toggle .div{width:.5px;background:var(--sand);align-self:stretch}
+    #inicio{padding:7rem 3.5rem 5rem;border-bottom:.5px solid var(--sand);animation:fadeUp .9s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--stone);margin-bottom:2.5rem}
+    .hero-title{font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.08;margin-bottom:2.5rem;max-width:700px}
+    .hero-title em{font-style:italic;color:var(--taupe)}
+    .hero-body{font-size:.72rem;color:var(--stone);max-width:360px;line-height:2.1;letter-spacing:.04em}
+    .hero-row{display:flex;align-items:flex-end;justify-content:space-between;margin-top:5rem;gap:2rem;flex-wrap:wrap}
+    .stats{display:flex;gap:4rem}
+    .stat-num{font-family:var(--serif);font-size:2.8rem;font-weight:300;line-height:1}
+    .stat-label{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-top:.4rem}
+    .btn{display:inline-block;padding:.85rem 2.8rem;border:.5px solid var(--black);font-family:var(--sans);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--black);transition:all .35s;font-weight:300;text-decoration:none}
+    .btn:hover{background:var(--black);color:var(--cream)}
+    .btn-light{display:inline-block;padding:.85rem 2.8rem;border:.5px solid var(--sand);font-family:var(--sans);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--cream);transition:all .35s;font-weight:300;text-decoration:none}
+    .btn-light:hover{background:var(--cream);color:var(--black)}
+    .section{padding:4.5rem 3.5rem;border-bottom:.5px solid var(--sand)}
+    .sec-label{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--stone);margin-bottom:3.5rem;display:flex;justify-content:space-between}
+    .works{display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .wi{padding:2.5rem;border:.5px solid var(--sand);margin:-.25px;transition:background .35s,border-color .35s;position:relative;min-height:260px;display:flex;flex-direction:column;justify-content:space-between}
+    .wi:hover{background:var(--black);border-color:var(--black)}
+    .wi:hover .wn,.wi:hover .wcat,.wi:hover .wd,.wi:hover .wy{color:var(--stone)}
+    .wi:hover .wt{color:var(--sand)}
+    .wi:hover .wline{background:rgba(255,255,255,.12)}
+    .wn{font-size:.55rem;letter-spacing:.2em;color:var(--stone);font-weight:300;transition:color .35s}
+    .wt{font-family:var(--serif);font-size:1.6rem;font-weight:300;margin:1.2rem 0 .3rem;transition:color .35s}
+    .wcat{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-bottom:1.5rem;transition:color .35s}
+    .wline{height:.5px;background:var(--sand);margin-bottom:1.5rem;transition:background .35s}
+    .wd{font-size:.65rem;color:var(--stone);line-height:1.9;transition:color .35s;font-weight:300}
+    .wy{font-family:var(--serif);font-size:.85rem;color:var(--stone);position:absolute;bottom:2rem;right:2.5rem;transition:color .35s}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+    .about-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:2rem}
+    .about-title em{font-style:italic;color:var(--taupe)}
+    .about-body{font-size:.7rem;color:var(--stone);line-height:2.2;font-weight:300;letter-spacing:.02em}
+    .skills{margin-top:2.5rem}
+    .skill-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:.5px solid var(--sand)}
+    .skill-name{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:300}
+    .dot{width:5px;height:5px;border-radius:50%;background:var(--taupe);flex-shrink:0}
+    .svcs{display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .svc{padding:2rem 2.5rem;border:.5px solid var(--sand);margin:-.25px}
+    .svc-n{font-family:var(--serif);font-size:.8rem;color:var(--stone);margin-bottom:1rem}
+    .svc-t{font-family:var(--serif);font-size:1.3rem;font-weight:300;margin-bottom:.8rem}
+    .svc-d{font-size:.63rem;color:var(--stone);line-height:1.9;font-weight:300}
+    .svc-p{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--taupe);margin-top:1.2rem;font-weight:300}
+    .cw{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+    .cl{background:var(--black);padding:5rem 3.5rem;display:flex;flex-direction:column;justify-content:space-between}
+    .cl .big{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:3rem}
+    .cl .big em{font-style:italic;color:var(--sand)}
+    .cr{padding:5rem 3.5rem;background:var(--cream)}
+    .cd{margin-bottom:2.5rem}
+    .cd-l{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-bottom:.5rem}
+    .cd-v{font-family:var(--serif);font-size:1.15rem;font-weight:300;color:var(--black)}
+    .cd-v a{color:var(--black);text-decoration:none}
+    .cd-v a:hover{color:var(--taupe)}
+    footer{padding:1.8rem 3.5rem;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--sand)}
+    .ft{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--stone);font-weight:300}
+    @media(max-width:700px){
+      nav{padding:1.2rem 1.5rem;flex-wrap:wrap;gap:1rem}
+      #inicio,.section,.cl,.cr,footer{padding-left:1.5rem;padding-right:1.5rem}
+      .works,.about-grid,.svcs,.cw{grid-template-columns:1fr}
+      .stats{gap:2rem}
+      .hero-row{flex-direction:column;align-items:flex-start}
+      .nav-links{gap:1.5rem}
+      .nav-right{flex-wrap:wrap;gap:1rem}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Samantha Quintero</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#trabajo" data-es="Trabajo" data-en="Work">Trabajo</a>
+      <a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a>
+      <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+    </div>
+    <div class="lang-toggle">
+      <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+      <div class="div"></div>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <p class="eyebrow" data-es="Diseno digital &middot; Campanas de performance &middot; Ensenada, Mexico" data-en="Digital Design &middot; Performance Campaigns &middot; Ensenada, Mexico">Diseno digital &middot; Campanas de performance &middot; Ensenada, Mexico</p>
+  <h1 class="hero-title" data-es="Campanas que<br>convierten <em>ideas</em><br>en resultados." data-en="Campaigns that turn<br><em>ideas</em> into<br>real results.">Campanas que<br>convierten <em>ideas</em><br>en resultados.</h1>
+  <p class="hero-body" data-es="Disenadora grafica y especialista en marketing digital. Creo activos visuales y campanas pagadas que generan leads reales, no solo impresiones." data-en="Graphic designer and digital marketing specialist. I create visual assets and paid campaigns that generate real leads, not just impressions.">Disenadora grafica y especialista en marketing digital. Creo activos visuales y campanas pagadas que generan leads reales, no solo impresiones.</p>
+  <div class="hero-row">
+    <a class="btn" href="#contacto" data-es="Trabajemos juntos" data-en="Let's work together">Trabajemos juntos</a>
+    <div class="stats">
+      <div><div class="stat-num">15x</div><div class="stat-label" data-es="Leads en WhatsApp" data-en="WhatsApp Leads">Leads en WhatsApp</div></div>
+      <div><div class="stat-num">653%</div><div class="stat-label" data-es="Crecimiento en reach" data-en="Reach growth">Crecimiento en reach</div></div>
+      <div><div class="stat-num">29k+</div><div class="stat-label" data-es="Views en Facebook" data-en="Facebook views">Views en Facebook</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRABAJO -->
+<section id="trabajo" class="section">
+  <div class="sec-label"><span data-es="Trabajo seleccionado" data-en="Selected work">Trabajo seleccionado</span><span>01&mdash;04</span></div>
+  <div class="works">
+    <div class="wi">
+      <div>
+        <div class="wn">01</div>
+        <div class="wt" data-es="Lead Gen &middot; Corinthia Petite" data-en="Lead Gen &middot; Corinthia Petite">Lead Gen &middot; Corinthia Petite</div>
+        <div class="wcat" data-es="Meta Ads &middot; Diseno de piezas &middot; WhatsApp" data-en="Meta Ads &middot; Ad Design &middot; WhatsApp">Meta Ads &middot; Diseno de piezas &middot; WhatsApp</div>
+        <div class="wline"></div>
+        <div class="wd" data-es="Campana de generacion de leads para tienda de moda en Ensenada. Con $700 MXN de presupuesto, se paso de 1 a 15 mensajes semanales en WhatsApp. 9 prospectos continuaron conversacion." data-en="Lead generation campaign for a fashion boutique in Ensenada. With a $700 MXN budget, weekly WhatsApp inquiries went from 1 to 15. 9 prospects continued the conversation.">Campana de generacion de leads para tienda de moda en Ensenada. Con $700 MXN de presupuesto, se paso de 1 a 15 mensajes semanales en WhatsApp. 9 prospectos continuaron conversacion.</div>
+      </div>
+      <div class="wy">2026</div>
+    </div>
+    <div class="wi">
+      <div>
+        <div class="wn">02</div>
+        <div class="wt" data-es="Contenido Social &middot; Vermilion Media" data-en="Social Content &middot; Vermilion Media">Contenido Social &middot; Vermilion Media</div>
+        <div class="wcat" data-es="Facebook &middot; Storytelling visual &middot; Moda infantil" data-en="Facebook &middot; Visual storytelling &middot; Kids fashion">Facebook &middot; Storytelling visual &middot; Moda infantil</div>
+        <div class="wline"></div>
+        <div class="wd" data-es="Diseno de contenido para marca de moda infantil. 29,000+ views en Facebook en menos de un mes, 653% de crecimiento en reach. El 89% del nuevo publico vino de no seguidores." data-en="Content design for a kids fashion brand. 29,000+ Facebook views in under a month, 653% reach growth. 89% of new viewers were non-followers.">Diseno de contenido para marca de moda infantil. 29,000+ views en Facebook en menos de un mes, 653% de crecimiento en reach. El 89% del nuevo publico vino de no seguidores.</div>
+      </div>
+      <div class="wy">2026</div>
+    </div>
+    <div class="wi">
+      <div>
+        <div class="wn">03</div>
+        <div class="wt" data-es="Email Marketing &middot; Freelance" data-en="Email Marketing &middot; Freelance">Email Marketing &middot; Freelance</div>
+        <div class="wcat" data-es="Segmentacion &middot; Canva &middot; A/B Testing &middot; Copy" data-en="Segmentation &middot; Canva &middot; A/B Testing &middot; Copywriting">Segmentacion &middot; Canva &middot; A/B Testing &middot; Copy</div>
+        <div class="wline"></div>
+        <div class="wd" data-es="Diseno de emails transaccionales y nurturing para clientes remotos. Segmentacion por ubicacion, perfil demografico e intereses. A/B testing de creativos y mensajes de conversion." data-en="Designed transactional and nurturing emails for remote clients. Segmentation by location, demographics and interests. A/B testing of creatives and conversion copy.">Diseno de emails transaccionales y nurturing para clientes remotos. Segmentacion por ubicacion, perfil demografico e intereses. A/B testing de creativos y mensajes de conversion.</div>
+      </div>
+      <div class="wy">2025&ndash;26</div>
+    </div>
+    <div class="wi" style="border-style:dashed;opacity:.45">
+      <div>
+        <div class="wn">04</div>
+        <div class="wt" style="font-style:italic;color:var(--stone)" data-es="Proximo proyecto" data-en="Next project">Proximo proyecto</div>
+        <div class="wcat" data-es="Tu siguiente caso de estudio" data-en="Your next case study">Tu siguiente caso de estudio</div>
+        <div class="wline"></div>
+        <div class="wd" data-es="Agrega aqui tu proximo proyecto editando el HTML." data-en="Add your next project here by editing the HTML.">Agrega aqui tu proximo proyecto editando el HTML.</div>
+      </div>
+      <div class="wy">2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MI -->
+<section id="sobre-mi" class="section">
+  <div class="sec-label"><span data-es="Sobre mi" data-en="About me">Sobre mi</span></div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-title" data-es="Diseno con <em>intencion.</em><br>Comunico con precision." data-en="I design with <em>intention.</em><br>I communicate with precision.">Diseno con <em>intencion.</em><br>Comunico con precision.</h2>
+      <p class="about-body" data-es="Soy Samantha Quintero, disenadora grafica y creadora de contenido digital basada en Ensenada, BC. Estudio Marketing y Diseno Grafico en la UAD y combino ambas disciplinas para crear campanas que no solo se ven bien, convierten.<br><br>Trabajo con Adobe Photoshop, Illustrator, InDesign, Canva y CapCut. Hablo espanol nativo e ingles upper-intermediate." data-en="I am Samantha Quintero, a graphic designer and digital content creator based in Ensenada, BC. I study Marketing and Graphic Design at UAD, combining both disciplines to build campaigns that do not just look good, they convert.<br><br>I work with Adobe Photoshop, Illustrator, InDesign, Canva and CapCut. Native Spanish speaker, upper-intermediate English.">Soy Samantha Quintero, disenadora grafica y creadora de contenido digital basada en Ensenada, BC. Estudio Marketing y Diseno Grafico en la UAD y combino ambas disciplinas para crear campanas que no solo se ven bien, convierten.<br><br>Trabajo con Adobe Photoshop, Illustrator, InDesign, Canva y CapCut. Hablo espanol nativo e ingles upper-intermediate.</p>
+    </div>
+    <div>
+      <div class="skills">
+        <div class="skill-row"><span class="skill-name" data-es="Meta Ads &amp; campanas pagadas" data-en="Meta Ads &amp; paid campaigns">Meta Ads &amp; campanas pagadas</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Diseno de piezas digitales" data-en="Digital ad design">Diseno de piezas digitales</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Social media &amp; storytelling" data-en="Social media &amp; storytelling">Social media &amp; storytelling</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Email marketing" data-en="Email marketing">Email marketing</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Copy de conversion" data-en="Conversion copywriting">Copy de conversion</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Adobe Suite &middot; Canva &middot; CapCut" data-en="Adobe Suite &middot; Canva &middot; CapCut">Adobe Suite &middot; Canva &middot; CapCut</span><div class="dot"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="section">
+  <div class="sec-label"><span data-es="Servicios" data-en="Services">Servicios</span></div>
+  <div class="svcs">
+    <div class="svc">
+      <div class="svc-n">01</div>
+      <div class="svc-t" data-es="Diseno de Campana" data-en="Campaign Design">Diseno de Campana</div>
+      <div class="svc-d" data-es="Piezas visuales para Meta Ads, Google Display y redes sociales. Desde el concepto creativo hasta los formatos listos para publicar." data-en="Visual assets for Meta Ads, Google Display and social media. From creative concept to publish-ready formats.">Piezas visuales para Meta Ads, Google Display y redes sociales. Desde el concepto creativo hasta los formatos listos para publicar.</div>
+      <div class="svc-p" data-es="Desde $2,500 MXN" data-en="From $2,500 MXN">Desde $2,500 MXN</div>
+    </div>
+    <div class="svc">
+      <div class="svc-n">02</div>
+      <div class="svc-t" data-es="Gestion de Ads" data-en="Ads Management">Gestion de Ads</div>
+      <div class="svc-d" data-es="Planeacion y ejecucion de campanas en Meta Ads Manager. Segmentacion de audiencias, optimizacion y reporte de resultados." data-en="Campaign planning and execution in Meta Ads Manager. Audience segmentation, optimization and results reporting.">Planeacion y ejecucion de campanas en Meta Ads Manager. Segmentacion de audiencias, optimizacion y reporte de resultados.</div>
+      <div class="svc-p" data-es="Desde $3,500 MXN / mes" data-en="From $3,500 MXN / month">Desde $3,500 MXN / mes</div>
+    </div>
+    <div class="svc">
+      <div class="svc-n">03</div>
+      <div class="svc-t" data-es="Contenido Social" data-en="Social Content">Contenido Social</div>
+      <div class="svc-d" data-es="Diseno de piezas para feed y stories. Estrategia visual alineada a la identidad de marca para crecer alcance organico." data-en="Design for feed and stories. Visual strategy aligned with brand identity to grow organic reach.">Diseno de piezas para feed y stories. Estrategia visual alineada a la identidad de marca para crecer alcance organico.</div>
+      <div class="svc-p" data-es="Desde $1,800 MXN / mes" data-en="From $1,800 MXN / month">Desde $1,800 MXN / mes</div>
+    </div>
+    <div class="svc" style="background:var(--black);border-color:var(--black)">
+      <div class="svc-n" style="color:var(--stone)">&rarr;</div>
+      <div class="svc-t" style="color:var(--cream);font-style:italic" data-es="Algo diferente?" data-en="Something different?">Algo diferente?</div>
+      <div class="svc-d" style="color:var(--stone)" data-es="Cuentame tu proyecto. Si esta dentro de mis habilidades, lo hacemos. Si no, te digo honestamente hacia donde ir." data-en="Tell me about your project. If it is within my skillset, let us do it. If not, I will honestly point you in the right direction.">Cuentame tu proyecto. Si esta dentro de mis habilidades, lo hacemos. Si no, te digo honestamente hacia donde ir.</div>
+      <a class="btn-light" href="mailto:Thedisenoclub@gmail.com" style="margin-top:1.5rem;font-size:.55rem" data-es="Conversemos" data-en="Let's talk">Conversemos</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="cw">
+    <div class="cl">
+      <h2 class="big" data-es="Lista para tu<br>proxima <em>campana?</em>" data-en="Ready for your<br>next <em>campaign?</em>">Lista para tu<br>proxima <em>campana?</em></h2>
+      <div>
+        <p style="font-size:.65rem;color:var(--stone);line-height:2;margin-bottom:2rem;font-weight:300" data-es="No espero a que el trabajo llegue solo. Si tienes un proyecto que necesita diseno con criterio y resultados medibles, escribeme." data-en="I do not wait for work to find me. If you have a project that needs thoughtful design and measurable results, reach out.">No espero a que el trabajo llegue solo. Si tienes un proyecto que necesita diseno con criterio y resultados medibles, escribeme.</p>
+        <a class="btn-light" href="mailto:Thedisenoclub@gmail.com" data-es="Enviar propuesta" data-en="Send a proposal">Enviar propuesta</a>
+      </div>
+    </div>
+    <div class="cr">
+      <div class="cd"><div class="cd-l" data-es="Email" data-en="Email">Email</div><div class="cd-v"><a href="mailto:Thedisenoclub@gmail.com">Thedisenoclub@gmail.com</a></div></div>
+      <div class="cd"><div class="cd-l" data-es="Telefono / WhatsApp" data-en="Phone / WhatsApp">Telefono / WhatsApp</div><div class="cd-v"><a href="https://wa.me/526531647388">+52 653 164 7388</a></div></div>
+      <div class="cd"><div class="cd-l" data-es="Ubicacion" data-en="Location">Ubicacion</div><div class="cd-v" data-es="Ensenada, BC &middot; Remoto global" data-en="Ensenada, BC &middot; Remote worldwide">Ensenada, BC &middot; Remoto global</div></div>
+      <div class="cd"><div class="cd-l" data-es="Disponibilidad" data-en="Availability">Disponibilidad</div><div class="cd-v" data-es="Disponible para proyectos ahora" data-en="Available for projects now">Disponible para proyectos ahora</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft">&copy; 2026 Samantha Quintero &middot; Ensenada, BC</span>
+  <span class="ft" data-es="Diseno digital &middot; Marketing de performance" data-en="Digital design &middot; Performance marketing">Diseno digital &middot; Marketing de performance</span>
+</footer>
+
+<script>
+// =========================================================
+// LANGUAGE SYSTEM
+// To translate a new element: add data-es="..." data-en="..."
+// The script handles everything automatically.
+// =========================================================
+var lang = 'es';
+
+function setLang(l) {
+  if (l === lang) return;
+  lang = l;
+  document.body.classList.add('switching');
+  setTimeout(function() {
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-es]').forEach(function(el) {
+      var t = el.getAttribute('data-' + l);
+      if (t !== null) el.innerHTML = t;
+    });
+    document.getElementById('btn-es').classList.toggle('active', l === 'es');
+    document.getElementById('btn-en').classList.toggle('active', l === 'en');
+    document.body.classList.remove('switching');
+  }, 200);
+}
+
+// Auto-detect browser language on first load
+if ((navigator.language || '').startsWith('en')) setLang('en');
+</script>
+
+</body>
+</html>
