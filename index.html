@@ -84,6 +84,19 @@
       .hero-row{flex-direction:column;align-items:flex-start}
       .nav-links{gap:1.5rem}
       .nav-right{flex-wrap:wrap;gap:1rem}
+
+      #work-preview{
+position:fixed;
+pointer-events:none;
+z-index:998;
+display:none;
+}
+
+#work-preview img{
+width:320px;
+box-shadow:0 20px 40px rgba(0,0,0,.25);
+border-radius:6px;
+}
     }
   </style>
 </head>
@@ -133,7 +146,14 @@
     <div class="wi" onclick="openProject('corinthia')">
       <div>
         <div class="wn">01</div>
+<div id="work-preview">
+  <img id="preview-image" src="">
+</div>
 
+<!-- PROJECT VIEWER -->
+<div id="project-modal">
+...
+</div>
         <div class="wt"
         data-es="Lead Gen · Corinthia Petite"
         data-en="Lead Gen · Corinthia Petite">
@@ -394,5 +414,46 @@ function setLang(l) {
 if ((navigator.language || '').startsWith('en')) setLang('en');
 </script>
 
+  <script>
+
+const preview = document.getElementById("work-preview")
+const previewImg = document.getElementById("preview-image")
+
+document.querySelectorAll(".wi").forEach(item => {
+
+item.addEventListener("mouseenter", e => {
+
+if(item.innerText.includes("Corinthia")){
+previewImg.src="img/corinthia1.jpg"
+}
+
+if(item.innerText.includes("Vermilion")){
+previewImg.src="img/vermillion1.jpg"
+}
+
+if(item.innerText.includes("Email")){
+previewImg.src="img/email1.jpg"
+}
+
+preview.style.display="block"
+
+})
+
+item.addEventListener("mousemove", e => {
+
+preview.style.left = e.pageX + 20 + "px"
+preview.style.top = e.pageY + 20 + "px"
+
+})
+
+item.addEventListener("mouseleave", () => {
+
+preview.style.display="none"
+
+})
+
+})
+
+</script>
 </body>
 </html> 
