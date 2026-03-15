@@ -1,107 +1,364 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Samantha Quintero &middot; Digital Design &amp; Marketing</title>
+  <title>Samantha Quintero · Diseño Digital & Marketing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    :root{--cream:#f4f1ec;--black:#111111;--sand:#d8cfc4;--taupe:#8c7f74;--stone:#a9a29a;--serif:"Cormorant Garamond",serif;--sans:"Jost",sans-serif}
-    html{scroll-behavior:smooth}
-    body{background:var(--cream);color:var(--black);font-family:var(--sans);font-weight:300;overflow-x:hidden;transition:opacity .2s}
-    body.switching{opacity:0}
-    nav{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 3.5rem;background:var(--cream);border-bottom:.5px solid var(--sand)}
-    .logo{font-family:var(--serif);font-size:1.15rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase}
-    .nav-right{display:flex;align-items:center;gap:2.5rem}
-    .nav-links{display:flex;gap:2.5rem}
-    .nav-links a{text-decoration:none;color:var(--stone);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;font-weight:300;transition:color .3s}
-    .nav-links a:hover{color:var(--black)}
-    .lang-toggle{display:flex;align-items:center;border:.5px solid var(--sand);border-radius:2px;overflow:hidden}
-    .lang-toggle button{background:transparent;border:none;cursor:pointer;font-family:var(--sans);font-size:.55rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;padding:.4rem .8rem;color:var(--stone);transition:background .2s,color .2s}
-    .lang-toggle button.active{background:var(--black);color:var(--cream)}
-    .lang-toggle .div{width:.5px;background:var(--sand);align-self:stretch}
-    #inicio{padding:7rem 3.5rem 5rem;border-bottom:.5px solid var(--sand);animation:fadeUp .9s ease both}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-    .eyebrow{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--stone);margin-bottom:2.5rem}
-    .hero-title{font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.08;margin-bottom:2.5rem;max-width:700px}
-    .hero-title em{font-style:italic;color:var(--taupe)}
-    .hero-body{font-size:.72rem;color:var(--stone);max-width:360px;line-height:2.1;letter-spacing:.04em}
-    .hero-row{display:flex;align-items:flex-end;justify-content:space-between;margin-top:5rem;gap:2rem;flex-wrap:wrap}
-    .stats{display:flex;gap:4rem}
-    .stat-num{font-family:var(--serif);font-size:2.8rem;font-weight:300;line-height:1}
-    .stat-label{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-top:.4rem}
-    .btn{display:inline-block;padding:.85rem 2.8rem;border:.5px solid var(--black);font-family:var(--sans);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--black);transition:all .35s;font-weight:300;text-decoration:none}
-    .btn:hover{background:var(--black);color:var(--cream)}
-    .btn-light{display:inline-block;padding:.85rem 2.8rem;border:.5px solid var(--sand);font-family:var(--sans);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--cream);transition:all .35s;font-weight:300;text-decoration:none}
-    .btn-light:hover{background:var(--cream);color:var(--black)}
-    .section{padding:4.5rem 3.5rem;border-bottom:.5px solid var(--sand)}
-    .sec-label{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--stone);margin-bottom:3.5rem;display:flex;justify-content:space-between}
-    .works{display:grid;grid-template-columns:1fr 1fr;gap:0}
-    .wi{padding:2.5rem;border:.5px solid var(--sand);margin:-.25px;transition:background .35s,border-color .35s;position:relative;min-height:260px;display:flex;flex-direction:column;justify-content:space-between}
-    .wi:hover{background:var(--black);border-color:var(--black)}
-    .wi:hover .wn,.wi:hover .wcat,.wi:hover .wd,.wi:hover .wy{color:var(--stone)}
-    .wi:hover .wt{color:var(--sand)}
-    .wi:hover .wline{background:rgba(255,255,255,.12)}
-    .wn{font-size:.55rem;letter-spacing:.2em;color:var(--stone);font-weight:300;transition:color .35s}
-    .wt{font-family:var(--serif);font-size:1.6rem;font-weight:300;margin:1.2rem 0 .3rem;transition:color .35s}
-    .wcat{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-bottom:1.5rem;transition:color .35s}
-    .wline{height:.5px;background:var(--sand);margin-bottom:1.5rem;transition:background .35s}
-    .wd{font-size:.65rem;color:var(--stone);line-height:1.9;transition:color .35s;font-weight:300}
-    .wy{font-family:var(--serif);font-size:.85rem;color:var(--stone);position:absolute;bottom:2rem;right:2.5rem;transition:color .35s}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-    .about-title{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:2rem}
-    .about-title em{font-style:italic;color:var(--taupe)}
-    .about-body{font-size:.7rem;color:var(--stone);line-height:2.2;font-weight:300;letter-spacing:.02em}
-    .skills{margin-top:2.5rem}
-    .skill-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:.5px solid var(--sand)}
-    .skill-name{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:300}
-    .dot{width:5px;height:5px;border-radius:50%;background:var(--taupe);flex-shrink:0}
-    .svcs{display:grid;grid-template-columns:1fr 1fr;gap:0}
-    .svc{padding:2rem 2.5rem;border:.5px solid var(--sand);margin:-.25px}
-    .svc-n{font-family:var(--serif);font-size:.8rem;color:var(--stone);margin-bottom:1rem}
-    .svc-t{font-family:var(--serif);font-size:1.3rem;font-weight:300;margin-bottom:.8rem}
-    .svc-d{font-size:.63rem;color:var(--stone);line-height:1.9;font-weight:300}
-    .svc-p{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--taupe);margin-top:1.2rem;font-weight:300}
-    .cw{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
-    .cl{background:var(--black);padding:5rem 3.5rem;display:flex;flex-direction:column;justify-content:space-between}
-    .cl .big{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:3rem}
-    .cl .big em{font-style:italic;color:var(--sand)}
-    .cr{padding:5rem 3.5rem;background:var(--cream)}
-    .cd{margin-bottom:2.5rem}
-    .cd-l{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-bottom:.5rem}
-    .cd-v{font-family:var(--serif);font-size:1.15rem;font-weight:300;color:var(--black)}
-    .cd-v a{color:var(--black);text-decoration:none}
-    .cd-v a:hover{color:var(--taupe)}
-    footer{padding:1.8rem 3.5rem;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--sand)}
-    .ft{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--stone);font-weight:300}
-    @media(max-width:700px){
-      nav{padding:1.2rem 1.5rem;flex-wrap:wrap;gap:1rem}
-      #inicio,.section,.cl,.cr,footer{padding-left:1.5rem;padding-right:1.5rem}
-      .works,.about-grid,.svcs,.cw{grid-template-columns:1fr}
-      .stats{gap:2rem}
-      .hero-row{flex-direction:column;align-items:flex-start}
-      .nav-links{gap:1.5rem}
-      .nav-right{flex-wrap:wrap;gap:1rem}
+/* =========================================================
+   SAMANTHA QUINTERO — Portfolio Styles
+   Para cambiar colores edita las variables en :root
+========================================================= */
 
-      #work-preview{
-position:fixed;
-pointer-events:none;
-z-index:998;
-display:none;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #f4f1ec;
+  --black: #111111;
+  --sand:  #d8cfc4;
+  --taupe: #8c7f74;
+  --stone: #a9a29a;
+  --serif: 'Cormorant Garamond', serif;
+  --sans:  'Jost', sans-serif;
 }
 
-#work-preview img{
-width:320px;
-box-shadow:0 20px 40px rgba(0,0,0,.25);
-border-radius:6px;
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  transition: opacity .2s;
 }
-    }
-  </style>
+body.switching { opacity: 0; }
+
+/* ----- NAV ----- */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.8rem 3.5rem;
+  background: var(--cream);
+  border-bottom: .5px solid var(--sand);
+}
+.logo {
+  font-family: var(--serif); font-size: 1.15rem;
+  font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
+}
+.nav-right { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links { display: flex; gap: 2.5rem; }
+.nav-links a {
+  text-decoration: none; color: var(--stone);
+  font-size: .6rem; letter-spacing: .25em;
+  text-transform: uppercase; font-weight: 300; transition: color .3s;
+}
+.nav-links a:hover { color: var(--black); }
+
+/* ----- TOGGLE ES/EN ----- */
+.lang-toggle {
+  display: flex; align-items: center;
+  border: .5px solid var(--sand); border-radius: 2px; overflow: hidden;
+}
+.lang-toggle button {
+  background: transparent; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: .55rem; font-weight: 300;
+  letter-spacing: .2em; text-transform: uppercase;
+  padding: .4rem .8rem; color: var(--stone);
+  transition: background .2s, color .2s;
+}
+.lang-toggle button.active { background: var(--black); color: var(--cream); }
+.lang-toggle .divider { width: .5px; background: var(--sand); align-self: stretch; }
+
+/* ----- HERO ----- */
+#inicio {
+  padding: 7rem 3.5rem 5rem;
+  border-bottom: .5px solid var(--sand);
+  animation: fadeUp .9s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.eyebrow {
+  font-size: .58rem; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--stone); margin-bottom: 2.5rem;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300; line-height: 1.08;
+  margin-bottom: 2.5rem; max-width: 700px;
+}
+.hero-title em { font-style: italic; color: var(--taupe); }
+.hero-body {
+  font-size: .72rem; color: var(--stone);
+  max-width: 360px; line-height: 2.1; letter-spacing: .04em;
+}
+.hero-row {
+  display: flex; align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 5rem; gap: 2rem; flex-wrap: wrap;
+}
+.stats { display: flex; gap: 4rem; }
+.stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; line-height: 1; }
+.stat-label {
+  font-size: .55rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--stone); margin-top: .4rem;
+}
+
+/* ----- BUTTONS ----- */
+.btn {
+  display: inline-block; padding: .85rem 2.8rem;
+  border: .5px solid var(--black);
+  font-family: var(--sans); font-size: .58rem;
+  letter-spacing: .25em; text-transform: uppercase;
+  cursor: pointer; background: transparent; color: var(--black);
+  transition: all .35s; font-weight: 300; text-decoration: none;
+}
+.btn:hover { background: var(--black); color: var(--cream); }
+
+.btn-light {
+  display: inline-block; padding: .85rem 2.8rem;
+  border: .5px solid var(--sand);
+  font-family: var(--sans); font-size: .58rem;
+  letter-spacing: .25em; text-transform: uppercase;
+  cursor: pointer; background: transparent; color: var(--cream);
+  transition: all .35s; font-weight: 300; text-decoration: none;
+}
+.btn-light:hover { background: var(--cream); color: var(--black); }
+
+/* ----- SECTIONS ----- */
+.section { padding: 4.5rem 3.5rem; border-bottom: .5px solid var(--sand); }
+.sec-label {
+  font-size: .55rem; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--stone);
+  margin-bottom: 3.5rem;
+  display: flex; justify-content: space-between;
+}
+
+/* ----- WORK GRID ----- */
+.works { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.wi {
+  padding: 2.5rem; border: .5px solid var(--sand); margin: -.25px;
+  transition: background .35s, border-color .35s;
+  position: relative; min-height: 260px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  cursor: pointer;
+}
+.wi:hover { background: var(--black); border-color: var(--black); }
+.wi:hover .wn, .wi:hover .wcat, .wi:hover .wd, .wi:hover .wy { color: var(--stone); }
+.wi:hover .wt  { color: var(--sand); }
+.wi:hover .wline { background: rgba(255,255,255,.12); }
+
+/* hint de "click para ver" */
+.wi::after {
+  content: 'Ver proyecto →';
+  position: absolute; bottom: 2rem; left: 2.5rem;
+  font-size: .52rem; letter-spacing: .18em; text-transform: uppercase;
+  color: transparent;
+  transition: color .35s;
+}
+.wi:hover::after { color: var(--stone); }
+/* no mostrar hint en el placeholder */
+.wi.placeholder::after { display: none; }
+
+.wn   { font-size: .55rem; letter-spacing: .2em; color: var(--stone); font-weight: 300; transition: color .35s; }
+.wt   { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; margin: 1.2rem 0 .3rem; transition: color .35s; }
+.wcat { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--stone); margin-bottom: 1.5rem; transition: color .35s; }
+.wline { height: .5px; background: var(--sand); margin-bottom: 1.5rem; transition: background .35s; }
+.wd   { font-size: .65rem; color: var(--stone); line-height: 1.9; transition: color .35s; font-weight: 300; }
+.wy   { font-family: var(--serif); font-size: .85rem; color: var(--stone); position: absolute; bottom: 2rem; right: 2.5rem; transition: color .35s; }
+
+/* ----- ABOUT ----- */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.about-title { font-family: var(--serif); font-size: clamp(2rem,4vw,3rem); font-weight: 300; line-height: 1.15; margin-bottom: 2rem; }
+.about-title em { font-style: italic; color: var(--taupe); }
+.about-body { font-size: .7rem; color: var(--stone); line-height: 2.2; font-weight: 300; letter-spacing: .02em; }
+.skills { margin-top: 2.5rem; }
+.skill-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: .5px solid var(--sand); }
+.skill-name { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 300; }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--taupe); flex-shrink: 0; }
+
+/* ----- SERVICES ----- */
+.svcs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.svc  { padding: 2rem 2.5rem; border: .5px solid var(--sand); margin: -.25px; }
+.svc-n { font-family: var(--serif); font-size: .8rem; color: var(--stone); margin-bottom: 1rem; }
+.svc-t { font-family: var(--serif); font-size: 1.3rem; font-weight: 300; margin-bottom: .8rem; }
+.svc-d { font-size: .63rem; color: var(--stone); line-height: 1.9; font-weight: 300; }
+.svc-p { font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: var(--taupe); margin-top: 1.2rem; font-weight: 300; }
+
+/* ----- CONTACT ----- */
+.cw { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; }
+.cl { background: var(--black); padding: 5rem 3.5rem; display: flex; flex-direction: column; justify-content: space-between; }
+.cl .big { font-family: var(--serif); font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 300; color: var(--cream); line-height: 1.1; margin-bottom: 3rem; }
+.cl .big em { font-style: italic; color: var(--sand); }
+.cr { padding: 5rem 3.5rem; background: var(--cream); }
+.cd { margin-bottom: 2.5rem; }
+.cd-l { font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: var(--stone); margin-bottom: .5rem; }
+.cd-v { font-family: var(--serif); font-size: 1.15rem; font-weight: 300; color: var(--black); }
+.cd-v a { color: var(--black); text-decoration: none; }
+.cd-v a:hover { color: var(--taupe); }
+
+/* ----- FOOTER ----- */
+footer {
+  padding: 1.8rem 3.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: .5px solid var(--sand);
+}
+.ft { font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: var(--stone); font-weight: 300; }
+
+/* =========================================================
+   MODAL DE PROYECTO
+========================================================= */
+#project-modal {
+  position: fixed; inset: 0; z-index: 999;
+  display: none;
+  align-items: flex-start; justify-content: flex-end;
+}
+#project-modal.open { display: flex; }
+
+.pm-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(17,17,17,.55);
+  backdrop-filter: blur(4px);
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.pm-panel {
+  position: relative; z-index: 1;
+  width: min(680px, 100vw);
+  height: 100vh;
+  background: var(--cream);
+  overflow-y: auto;
+  animation: slideIn .35s cubic-bezier(.16,1,.3,1);
+  border-left: .5px solid var(--sand);
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.pm-close {
+  position: sticky; top: 0;
+  display: flex; align-items: center; justify-content: flex-end;
+  width: 100%; padding: 1.5rem 2rem;
+  background: var(--cream);
+  border: none; cursor: pointer;
+  font-size: 1rem; color: var(--stone);
+  transition: color .2s;
+  z-index: 2;
+  border-bottom: .5px solid var(--sand);
+}
+.pm-close:hover { color: var(--black); }
+
+.pm-inner { padding: 3rem 3rem 5rem; }
+
+.pm-top {
+  display: flex; justify-content: space-between;
+  align-items: baseline; margin-bottom: 1.5rem;
+}
+.pm-num  { font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: var(--stone); }
+.pm-year { font-family: var(--serif); font-size: .9rem; color: var(--stone); }
+
+.pm-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300; line-height: 1.1;
+  margin-bottom: .6rem;
+}
+.pm-cat {
+  font-size: .58rem; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--stone);
+  margin-bottom: 2.5rem;
+}
+
+/* Stats */
+.pm-stats {
+  display: flex; gap: 0;
+  border-top: .5px solid var(--sand);
+  border-bottom: .5px solid var(--sand);
+  margin-bottom: 3rem;
+}
+.pm-stat {
+  flex: 1; padding: 1.5rem 1rem;
+  border-right: .5px solid var(--sand);
+}
+.pm-stat:last-child { border-right: none; }
+.pm-stat-num   { font-family: var(--serif); font-size: 2rem; font-weight: 300; line-height: 1; }
+.pm-stat-label { font-size: .52rem; letter-spacing: .15em; text-transform: uppercase; color: var(--stone); margin-top: .4rem; }
+
+/* Imágenes */
+.pm-images {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.pm-fig { display: flex; flex-direction: column; gap: .6rem; }
+.pm-img-wrap {
+  width: 100%; background: var(--sand);
+  border-radius: 4px; overflow: hidden;
+  min-height: 200px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pm-img-wrap img {
+  width: 100%; height: auto;
+  display: block;
+  transition: transform .4s ease;
+}
+.pm-fig:hover .pm-img-wrap img { transform: scale(1.02); }
+.pm-caption {
+  font-size: .58rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--stone);
+}
+
+/* Placeholder cuando no hay imagen */
+.pm-img-placeholder {
+  width: 100%; min-height: 220px;
+  background: var(--sand);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--taupe);
+  margin-bottom: 1.5rem;
+}
+
+/* Secciones de texto */
+.pm-sections { display: flex; flex-direction: column; gap: 2.5rem; }
+.pm-heading {
+  font-size: .55rem; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--taupe);
+  margin-bottom: .8rem; font-weight: 300;
+}
+.pm-body {
+  font-size: .72rem; color: var(--black);
+  line-height: 2; font-weight: 300;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 700px) {
+  nav { padding: 1.2rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  #inicio, .section, .cl, .cr, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .works, .about-grid, .svcs, .cw { grid-template-columns: 1fr; }
+  .stats { gap: 2rem; }
+  .hero-row { flex-direction: column; align-items: flex-start; }
+  .nav-links { gap: 1.5rem; }
+  .nav-right { flex-wrap: wrap; gap: 1rem; }
+  .pm-panel { width: 100vw; }
+  .pm-inner { padding: 2rem 1.5rem 4rem; }
+  .pm-stats { flex-wrap: wrap; }
+}
+
+</style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="logo">Samantha Quintero</div>
   <div class="nav-right">
@@ -112,7 +369,7 @@ border-radius:6px;
     </div>
     <div class="lang-toggle">
       <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
-      <div class="div"></div>
+      <div class="divider"></div>
       <button id="btn-en" onclick="setLang('en')">EN</button>
     </div>
   </div>
@@ -120,15 +377,37 @@ border-radius:6px;
 
 <!-- HERO -->
 <section id="inicio">
-  <p class="eyebrow" data-es="Diseño digital &middot; Campañas de performance &middot; Ensenada, Mexico" data-en="Digital Design &middot; Performance Campaigns &middot; Ensenada, Mexico">Diseño digital &middot; Campañas de performance &middot; Ensenada, Mexico</p>
-  <h1 class="hero-title" data-es="Campañas que<br>convierten <em>ideas</em><br>en resultados." data-en="Campaigns that turn<br><em>ideas</em> into<br>real results.">Campañas que<br>convierten <em>ideas</em><br>en resultados.</h1>
-  <p class="hero-body" data-es="Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales, no solo impresiones." data-en="Graphic designer and digital marketing specialist. I create visual assets and paid campaigns that generate real leads, not just impressions.">Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales, no solo impresiones.</p>
+  <p class="eyebrow"
+     data-es="Diseño digital · Campañas de performance · Ensenada, México"
+     data-en="Digital Design · Performance Campaigns · Ensenada, Mexico">
+    Diseño digital · Campañas de performance · Ensenada, México
+  </p>
+  <h1 class="hero-title"
+      data-es="Campañas que<br>convierten <em>ideas</em><br>en resultados."
+      data-en="Campaigns that turn<br><em>ideas</em> into<br>real results.">
+    Campañas que<br>convierten <em>ideas</em><br>en resultados.
+  </h1>
+  <p class="hero-body"
+     data-es="Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales — no solo impresiones."
+     data-en="Graphic designer and digital marketing specialist. I create visual assets and paid campaigns that generate real leads — not just impressions.">
+    Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales — no solo impresiones.
+  </p>
   <div class="hero-row">
-    <a class="btn" href="#contacto" data-es="Trabajemos juntos" data-en="Let's work together">Trabajemos juntos</a>
+    <a class="btn" href="#contacto"
+       data-es="Trabajemos juntos" data-en="Let's work together">Trabajemos juntos</a>
     <div class="stats">
-      <div><div class="stat-num">15x</div><div class="stat-label" data-es="Leads en WhatsApp" data-en="WhatsApp Leads">Leads en WhatsApp</div></div>
-      <div><div class="stat-num">653%</div><div class="stat-label" data-es="Crecimiento en reach" data-en="Reach growth">Crecimiento en reach</div></div>
-      <div><div class="stat-num">29k+</div><div class="stat-label" data-es="Views en Facebook" data-en="Facebook views">Views en Facebook</div></div>
+      <div>
+        <div class="stat-num">15×</div>
+        <div class="stat-label" data-es="Leads en WhatsApp" data-en="WhatsApp Leads">Leads en WhatsApp</div>
+      </div>
+      <div>
+        <div class="stat-num">653%</div>
+        <div class="stat-label" data-es="Crecimiento en reach" data-en="Reach growth">Crecimiento en reach</div>
+      </div>
+      <div>
+        <div class="stat-num">29k+</div>
+        <div class="stat-label" data-es="Views en Facebook" data-en="Facebook views">Views en Facebook</div>
+      </div>
     </div>
   </div>
 </section>
@@ -137,160 +416,118 @@ border-radius:6px;
 <section id="trabajo" class="section">
   <div class="sec-label">
     <span data-es="Trabajo seleccionado" data-en="Selected work">Trabajo seleccionado</span>
-    <span>01&mdash;04</span>
+    <span>01 — 04</span>
   </div>
-
   <div class="works">
 
-    <!-- PROYECTO 01 -->
+    <!-- PROYECTO 01 — onclick="openProject('corinthia')" abre el modal -->
     <div class="wi" onclick="openProject('corinthia')">
       <div>
         <div class="wn">01</div>
-        
         <div class="wt"
-        data-es="Lead Gen · Corinthia Petite"
-        data-en="Lead Gen · Corinthia Petite">
-        Lead Gen · Corinthia Petite
-        </div>
-
+             data-es="Lead Gen · Corinthia Petite"
+             data-en="Lead Gen · Corinthia Petite">Lead Gen · Corinthia Petite</div>
         <div class="wcat"
-        data-es="Meta Ads · Diseño de piezas · WhatsApp"
-        data-en="Meta Ads · Ad Design · WhatsApp">
-        Meta Ads · Diseño de piezas · WhatsApp
-        </div>
-
+             data-es="Meta Ads · Diseño de piezas · WhatsApp"
+             data-en="Meta Ads · Ad Design · WhatsApp">Meta Ads · Diseño de piezas · WhatsApp</div>
         <div class="wline"></div>
-
         <div class="wd"
-        data-es="Campaña de generación de leads para una tienda de moda en Ensenada. Con $700 MXN de presupuesto se pasó de 1 a 15 mensajes semanales en WhatsApp. 9 prospectos continuaron la conversación."
-        data-en="Lead generation campaign for a fashion boutique in Ensenada. With a $40 USD budget, weekly WhatsApp inquiries increased from 1 to 15. 9 prospects continued the conversation.">
-        Campaña de generación de leads para una tienda de moda en Ensenada. Con $700 MXN de presupuesto se pasó de 1 a 15 mensajes semanales en WhatsApp. 9 prospectos continuaron la conversación.
+             data-es="Campaña de generación de leads para una tienda de moda en Ensenada. Con $700 MXN se pasó de 1 a 15 mensajes semanales en WhatsApp."
+             data-en="Lead generation campaign for a fashion boutique in Ensenada. With $700 MXN budget, weekly WhatsApp messages went from 1 to 15.">
+          Campaña de generación de leads para una tienda de moda en Ensenada. Con $700 MXN se pasó de 1 a 15 mensajes semanales en WhatsApp.
         </div>
-
       </div>
-
       <div class="wy">2026</div>
-
     </div>
-
 
     <!-- PROYECTO 02 -->
-    <div class="wi">
+    <div class="wi" onclick="openProject('vermilion')">
       <div>
-
         <div class="wn">02</div>
-
         <div class="wt"
-        data-es="Contenido Social · Vermilion Media"
-        data-en="Social Content · Vermilion Media">
-        Contenido Social · Vermilion Media
-        </div>
-
+             data-es="Contenido Social · Vermilion Media"
+             data-en="Social Content · Vermilion Media">Contenido Social · Vermilion Media</div>
         <div class="wcat"
-        data-es="Facebook · Storytelling visual · Moda infantil"
-        data-en="Facebook · Visual storytelling · Kids fashion">
-        Facebook · Storytelling visual · Moda infantil
-        </div>
-
+             data-es="Facebook · Storytelling visual · Moda infantil"
+             data-en="Facebook · Visual storytelling · Kids fashion">Facebook · Storytelling visual · Moda infantil</div>
         <div class="wline"></div>
-
         <div class="wd"
-        data-es="Diseño de contenido para una marca de moda infantil. 29,000+ views en Facebook en menos de un mes y 653% de crecimiento en alcance. El 89% del nuevo público provino de personas que no seguían la cuenta."
-        data-en="Content design for a kids fashion brand. 29,000+ Facebook views in under a month and 653% reach growth. 89% of the new viewers were non-followers.">
-        Diseño de contenido para una marca de moda infantil. 29,000+ views en Facebook en menos de un mes y 653% de crecimiento en alcance. El 89% del nuevo público provino de personas que no seguían la cuenta.
+             data-es="Diseño de contenido para una marca de moda infantil. 29,000+ views en Facebook en menos de un mes y 653% de crecimiento en alcance."
+             data-en="Content design for a kids fashion brand. 29,000+ Facebook views in under a month and 653% reach growth.">
+          Diseño de contenido para una marca de moda infantil. 29,000+ views en Facebook en menos de un mes y 653% de crecimiento en alcance.
         </div>
-
       </div>
-
       <div class="wy">2026</div>
     </div>
-
 
     <!-- PROYECTO 03 -->
-    <div class="wi">
+    <div class="wi" onclick="openProject('email')">
       <div>
-
         <div class="wn">03</div>
-
         <div class="wt"
-        data-es="Email Marketing · Freelance"
-        data-en="Email Marketing · Freelance">
-        Email Marketing · Freelance
-        </div>
-
+             data-es="Email Marketing · Freelance"
+             data-en="Email Marketing · Freelance">Email Marketing · Freelance</div>
         <div class="wcat"
-        data-es="Segmentación · Canva · A/B Testing · Copy"
-        data-en="Segmentation · Canva · A/B Testing · Copywriting">
-        Segmentación · Canva · A/B Testing · Copy
-        </div>
-
+             data-es="Segmentación · Canva · A/B Testing · Copy"
+             data-en="Segmentation · Canva · A/B Testing · Copywriting">Segmentación · Canva · A/B Testing · Copy</div>
         <div class="wline"></div>
-
         <div class="wd"
-        data-es="Diseño de emails transaccionales y campañas de nurturing para clientes remotos. Segmentación por ubicación, perfil demográfico e intereses. A/B testing de creativos y mensajes de conversión."
-        data-en="Designed transactional emails and nurturing campaigns for remote clients. Segmentation by location, demographics and interests. A/B testing of creatives and conversion copy.">
-        Diseño de emails transaccionales y campañas de nurturing para clientes remotos. Segmentación por ubicación, perfil demográfico e intereses. A/B testing de creativos y mensajes de conversión.
+             data-es="Diseño de emails transaccionales y campañas de nurturing para clientes remotos. A/B testing de creativos y mensajes de conversión."
+             data-en="Transactional emails and nurturing campaigns for remote clients. A/B testing of creatives and conversion copy.">
+          Diseño de emails transaccionales y campañas de nurturing para clientes remotos. A/B testing de creativos y mensajes de conversión.
         </div>
-
       </div>
-
-      <div class="wy">2025&ndash;26</div>
+      <div class="wy">2025–26</div>
     </div>
 
-
-    <!-- PROYECTO 04 -->
-    <div class="wi" style="border-style:dashed;opacity:.45">
-
+    <!-- PROYECTO 04 — placeholder, sin onclick -->
+    <div class="wi placeholder" style="border-style:dashed; opacity:.45; cursor:default;">
       <div>
-
         <div class="wn">04</div>
-
-        <div class="wt"
-        style="font-style:italic;color:var(--stone)"
-        data-es="Próximo proyecto"
-        data-en="Next project">
-        Próximo proyecto
-        </div>
-
+        <div class="wt" style="font-style:italic; color:var(--stone);"
+             data-es="Próximo proyecto" data-en="Next project">Próximo proyecto</div>
         <div class="wcat"
-        data-es="Tu siguiente caso de estudio"
-        data-en="Your next case study">
-        Tu siguiente caso de estudio
-        </div>
-
+             data-es="Tu siguiente caso de estudio"
+             data-en="Your next case study">Tu siguiente caso de estudio</div>
         <div class="wline"></div>
-
         <div class="wd"
-        data-es="Agrega aquí tu próximo proyecto editando el HTML."
-        data-en="Add your next project here by editing the HTML.">
-        Agrega aquí tu próximo proyecto editando el HTML.
+             data-es="Agrega aquí tu próximo proyecto en js/projects.js y añade onclick al .wi en index.html."
+             data-en="Add your next project in js/projects.js and add onclick to the .wi in index.html.">
+          Agrega aquí tu próximo proyecto en js/projects.js y añade onclick al .wi en index.html.
         </div>
-
       </div>
-
       <div class="wy">2026</div>
-
     </div>
 
   </div>
 </section>
 
-<!-- SOBRE MI -->
+<!-- SOBRE MÍ -->
 <section id="sobre-mi" class="section">
-  <div class="sec-label"><span data-es="Sobre mi" data-en="About me">Sobre mi</span></div>
+  <div class="sec-label">
+    <span data-es="Sobre mí" data-en="About me">Sobre mí</span>
+  </div>
   <div class="about-grid">
     <div>
-      <h2 class="about-title" data-es="Diseño con <em>intención.</em><br>Comunico con precisión." data-en="I design with <em>intention.</em><br>I communicate with precision.">Diseño con <em>intención.</em><br>Comunico con precisión.</h2>
-      <p class="about-body" data-es="Soy Samantha Quintero, diseñadora gráfica y creadora de contenido digital en Mexico. Estudié Marketing y Diseño Gráfico en la UAD y combino ambas disciplinas para crear campañas que no solo se ven bien, convierten.<br><br>Trabajo con Adobe Photoshop, Illustrator, InDesign, Canva y CapCut. Hablo español nativo e ingles upper-intermediate." data-en="I am Samantha Quintero, a graphic designer and digital content creator based in Mexico. I'm graduated in Marketing and Graphic Design at UAD, combining both disciplines to build campaigns that do not just look good, they convert.<br><br>I work with Adobe Photoshop, Illustrator, InDesign, Canva and CapCut. Native Spanish speaker, upper-intermediate English.">Soy Samantha Quintero, diseñadora gráfica y creadora de contenido digital basada en Mexico. Estudié Marketing y Diseño Gráfico en la UAD y combino ambas disciplinas para crear campañas que no solo se ven bien, convierten.<br><br>Trabajo con Adobe Photoshop, Illustrator, InDesign, Canva y CapCut. Hablo español nativo e ingles upper-intermediate.</p>
+      <h2 class="about-title"
+          data-es="Diseño con <em>intención.</em><br>Comunico con precisión."
+          data-en="I design with <em>intention.</em><br>I communicate with precision.">
+        Diseño con <em>intención.</em><br>Comunico con precisión.
+      </h2>
+      <p class="about-body"
+         data-es="Soy Samantha Quintero, diseñadora gráfica y creadora de contenido digital en México. Estudié Marketing y Diseño Gráfico en la UAD y combino ambas disciplinas para crear campañas que no solo se ven bien — convierten.<br><br>Trabajo con Adobe Photoshop, Illustrator, InDesign, Canva y CapCut. Hablo español nativo e inglés upper-intermediate."
+         data-en="I'm Samantha Quintero, a graphic designer and digital content creator based in Mexico. I studied Marketing and Graphic Design at UAD, combining both disciplines to build campaigns that don't just look good — they convert.<br><br>I work with Adobe Photoshop, Illustrator, InDesign, Canva and CapCut. Native Spanish speaker, upper-intermediate English.">
+        Soy Samantha Quintero, diseñadora gráfica y creadora de contenido digital en México. Estudié Marketing y Diseño Gráfico en la UAD y combino ambas disciplinas para crear campañas que no solo se ven bien — convierten.<br><br>Trabajo con Adobe Photoshop, Illustrator, InDesign, Canva y CapCut. Hablo español nativo e inglés upper-intermediate.
+      </p>
     </div>
     <div>
       <div class="skills">
-        <div class="skill-row"><span class="skill-name" data-es="Meta Ads &amp; campañas pagadas" data-en="Meta Ads &amp; paid campaigns">Meta Ads &amp; campañas pagadas</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Meta Ads & campañas pagadas" data-en="Meta Ads & paid campaigns">Meta Ads & campañas pagadas</span><div class="dot"></div></div>
         <div class="skill-row"><span class="skill-name" data-es="Diseño de piezas digitales" data-en="Digital ad design">Diseño de piezas digitales</span><div class="dot"></div></div>
-        <div class="skill-row"><span class="skill-name" data-es="Social media &amp; storytelling" data-en="Social media &amp; storytelling">Social media &amp; storytelling</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Social media & storytelling" data-en="Social media & storytelling">Social media & storytelling</span><div class="dot"></div></div>
         <div class="skill-row"><span class="skill-name" data-es="Email marketing" data-en="Email marketing">Email marketing</span><div class="dot"></div></div>
-        <div class="skill-row"><span class="skill-name" data-es="Copy de conversion" data-en="Conversion copywriting">Copy de conversion</span><div class="dot"></div></div>
-        <div class="skill-row"><span class="skill-name" data-es="Adobe Suite &middot; Canva &middot; CapCut" data-en="Adobe Suite &middot; Canva &middot; CapCut">Adobe Suite &middot; Canva &middot; CapCut</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Copy de conversión" data-en="Conversion copywriting">Copy de conversión</span><div class="dot"></div></div>
+        <div class="skill-row"><span class="skill-name" data-es="Adobe Suite · Canva · CapCut" data-en="Adobe Suite · Canva · CapCut">Adobe Suite · Canva · CapCut</span><div class="dot"></div></div>
       </div>
     </div>
   </div>
@@ -298,60 +535,53 @@ border-radius:6px;
 
 <!-- SERVICIOS -->
 <section id="servicios" class="section">
-  <div class="sec-label"><span data-es="Servicios" data-en="Services">Servicios</span></div>
+  <div class="sec-label">
+    <span data-es="Servicios" data-en="Services">Servicios</span>
+  </div>
   <div class="svcs">
-
     <div class="svc">
       <div class="svc-n">01</div>
       <div class="svc-t" data-es="Campaña de Generación de Leads" data-en="Lead Generation Campaign">Campaña de Generación de Leads</div>
-      <div class="svc-d" 
-      data-es="Estrategia completa de publicidad digital para atraer clientes mediante anuncios. Incluye investigación de audiencia, diseño de anuncios, copywriting, configuración en Meta Ads y optimización durante la campaña." 
-      data-en="Full digital advertising strategy designed to attract customers through paid ads. Includes audience research, ad creative design, copywriting, Meta Ads setup and campaign optimization.">
-      Estrategia completa de publicidad digital para atraer clientes mediante anuncios. Incluye investigación de audiencia, diseño de anuncios, copywriting, configuración en Meta Ads y optimización durante la campaña.
+      <div class="svc-d"
+           data-es="Estrategia completa de publicidad digital para atraer clientes. Incluye investigación de audiencia, diseño de anuncios, copywriting, configuración en Meta Ads y optimización."
+           data-en="Full digital advertising strategy to attract customers. Includes audience research, ad design, copywriting, Meta Ads setup and campaign optimization.">
+        Estrategia completa de publicidad digital para atraer clientes. Incluye investigación de audiencia, diseño de anuncios, copywriting, configuración en Meta Ads y optimización.
       </div>
-      <div class="svc-p" data-es="$50,000 MXN por campaña (incluye inversión en anuncios)" data-en="$2,700 USD per campaign (ad spend included)">
-      $50,000 MXN por campaña (incluye inversión en anuncios)
-      </div>
+      <div class="svc-p" data-es="$50,000 MXN por campaña" data-en="$2,700 USD per campaign">$50,000 MXN por campaña</div>
     </div>
-
     <div class="svc">
       <div class="svc-n">02</div>
       <div class="svc-t" data-es="Gestión de Ads" data-en="Ads Management">Gestión de Ads</div>
-      <div class="svc-d" 
-      data-es="Planeación, ejecución y optimización de campañas en Meta Ads Manager. Incluye segmentación de audiencias, monitoreo de rendimiento y ajustes continuos para mejorar resultados." 
-      data-en="Planning, execution and optimization of campaigns in Meta Ads Manager. Includes audience targeting, performance monitoring and ongoing improvements.">
-      Planeación, ejecución y optimización de campañas en Meta Ads Manager. Incluye segmentación de audiencias, monitoreo de rendimiento y ajustes continuos para mejorar resultados.
+      <div class="svc-d"
+           data-es="Planeación, ejecución y optimización de campañas en Meta Ads Manager. Segmentación de audiencias, monitoreo y ajustes continuos para mejorar resultados."
+           data-en="Planning, execution and optimization of campaigns in Meta Ads Manager. Audience targeting, performance monitoring and ongoing improvements.">
+        Planeación, ejecución y optimización de campañas en Meta Ads Manager. Segmentación de audiencias, monitoreo y ajustes continuos para mejorar resultados.
       </div>
-      <div class="svc-p" data-es="Desde $9,000 MXN / mes" data-en="From $500 USD / month">
-      Desde $9,000 MXN / mes
-      </div>
+      <div class="svc-p" data-es="Desde $9,000 MXN / mes" data-en="From $500 USD / month">Desde $9,000 MXN / mes</div>
     </div>
-
     <div class="svc">
       <div class="svc-n">03</div>
       <div class="svc-t" data-es="Creativos para Ads" data-en="Ad Creative Design">Creativos para Ads</div>
-      <div class="svc-d" 
-      data-es="Diseño de piezas visuales optimizadas para campañas publicitarias. Creativos diseñados para captar atención, mejorar el CTR y aumentar conversiones." 
-      data-en="Visual assets designed specifically for advertising campaigns. Creatives optimized to capture attention, improve CTR and increase conversions.">
-      Diseño de piezas visuales optimizadas para campañas publicitarias. Creativos diseñados para captar atención, mejorar el CTR y aumentar conversiones.
+      <div class="svc-d"
+           data-es="Diseño de piezas visuales optimizadas para publicidad. Creativos diseñados para captar atención, mejorar el CTR y aumentar conversiones."
+           data-en="Visual assets designed specifically for paid advertising. Creatives optimized to capture attention, improve CTR and increase conversions.">
+        Diseño de piezas visuales optimizadas para publicidad. Creativos diseñados para captar atención, mejorar el CTR y aumentar conversiones.
       </div>
-      <div class="svc-p" data-es="Desde $4,500 MXN" data-en="From $250 USD">
-      Desde $4,500 MXN
-      </div>
+      <div class="svc-p" data-es="Desde $4,500 MXN" data-en="From $250 USD">Desde $4,500 MXN</div>
     </div>
-
-    <div class="svc" style="background:var(--black);border-color:var(--black)">
-      <div class="svc-n" style="color:var(--stone)">&rarr;</div>
-      <div class="svc-t" style="color:var(--cream);font-style:italic" data-es="¿Algo diferente?" data-en="Something different?">¿Algo diferente?</div>
-      <div class="svc-d" 
-      style="color:var(--stone)" 
-      data-es="Cuéntame sobre tu proyecto. Si está dentro de mis habilidades, podemos desarrollarlo. Si no, te orientaré honestamente sobre la mejor dirección." 
-      data-en="Tell me about your project. If it fits my skillset, we can build it together. If not, I will honestly point you in the right direction.">
-      Cuéntame sobre tu proyecto. Si está dentro de mis habilidades, podemos desarrollarlo. Si no, te orientaré honestamente sobre la mejor dirección.
+    <div class="svc" style="background:var(--black); border-color:var(--black);">
+      <div class="svc-n" style="color:var(--stone);">→</div>
+      <div class="svc-t" style="color:var(--cream); font-style:italic;"
+           data-es="¿Algo diferente?" data-en="Something different?">¿Algo diferente?</div>
+      <div class="svc-d" style="color:var(--stone);"
+           data-es="Cuéntame sobre tu proyecto. Si está dentro de mis habilidades, podemos desarrollarlo. Si no, te orientaré honestamente."
+           data-en="Tell me about your project. If it fits my skillset, we can build it together. If not, I'll honestly point you in the right direction.">
+        Cuéntame sobre tu proyecto. Si está dentro de mis habilidades, podemos desarrollarlo. Si no, te orientaré honestamente.
       </div>
-      <a class="btn-light" href="mailto:Thedisenoclub@gmail.com" style="margin-top:1.5rem;font-size:.55rem" data-es="Conversemos" data-en="Let's talk">Conversemos</a>
+      <a class="btn-light" href="mailto:Thedisenoclub@gmail.com"
+         style="margin-top:1.5rem; font-size:.55rem;"
+         data-es="Conversemos" data-en="Let's talk">Conversemos</a>
     </div>
-
   </div>
 </section>
 
@@ -359,38 +589,73 @@ border-radius:6px;
 <section id="contacto">
   <div class="cw">
     <div class="cl">
-      <h2 class="big" data-es="Lista para tu<br>proxima <em>campana?</em>" data-en="Ready for your<br>next <em>campaign?</em>">Lista para tu<br>proxima <em>campana?</em></h2>
+      <h2 class="big"
+          data-es="¿Lista para tu<br>próxima <em>campaña?</em>"
+          data-en="Ready for your<br>next <em>campaign?</em>">
+        ¿Lista para tu<br>próxima <em>campaña?</em>
+      </h2>
       <div>
-        <p style="font-size:.65rem;color:var(--stone);line-height:2;margin-bottom:2rem;font-weight:300" data-es="No espero a que el trabajo llegue solo. Si tienes un proyecto que necesita diseno con criterio y resultados medibles, escribeme." data-en="I do not wait for work to find me. If you have a project that needs thoughtful design and measurable results, reach out.">No espero a que el trabajo llegue solo. Si tienes un proyecto que necesita diseno con criterio y resultados medibles, escribeme.</p>
-        <a class="btn-light" href="mailto:Thedisenoclub@gmail.com" data-es="Enviar propuesta" data-en="Send a proposal">Enviar propuesta</a>
+        <p style="font-size:.65rem; color:var(--stone); line-height:2; margin-bottom:2rem; font-weight:300;"
+           data-es="No espero a que el trabajo llegue solo. Si tienes un proyecto que necesita diseño con criterio y resultados medibles, escríbeme."
+           data-en="I don't wait for work to find me. If you have a project that needs thoughtful design and measurable results, reach out.">
+          No espero a que el trabajo llegue solo. Si tienes un proyecto que necesita diseño con criterio y resultados medibles, escríbeme.
+        </p>
+        <a class="btn-light" href="mailto:Thedisenoclub@gmail.com"
+           data-es="Enviar propuesta ↗" data-en="Send a proposal ↗">Enviar propuesta ↗</a>
       </div>
     </div>
     <div class="cr">
-      <div class="cd"><div class="cd-l" data-es="Email" data-en="Email">Email</div><div class="cd-v"><a href="mailto:Thedisenoclub@gmail.com">Thedisenoclub@gmail.com</a></div></div>
-      <div class="cd"><div class="cd-l" data-es="Telefono / WhatsApp" data-en="Phone / WhatsApp">Telefono / WhatsApp</div><div class="cd-v"><a href="https://wa.me/526531647388">+52 653 164 7388</a></div></div>
-      <div class="cd"><div class="cd-l" data-es="Ubicacion" data-en="Location">Ubicacion</div><div class="cd-v" data-es="Ensenada, BC &middot; Remoto global" data-en="Ensenada, BC &middot; Remote worldwide">Ensenada, BC &middot; Remoto global</div></div>
-      <div class="cd"><div class="cd-l" data-es="Disponibilidad" data-en="Availability">Disponibilidad</div><div class="cd-v" data-es="Disponible para proyectos ahora" data-en="Available for projects now">Disponible para proyectos ahora</div></div>
+      <div class="cd">
+        <div class="cd-l" data-es="Email" data-en="Email">Email</div>
+        <div class="cd-v"><a href="mailto:Thedisenoclub@gmail.com">Thedisenoclub@gmail.com</a></div>
+      </div>
+      <div class="cd">
+        <div class="cd-l" data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</div>
+        <div class="cd-v"><a href="https://wa.me/526531647388">+52 653 164 7388</a></div>
+      </div>
+      <div class="cd">
+        <div class="cd-l" data-es="Ubicación" data-en="Location">Ubicación</div>
+        <div class="cd-v" data-es="Ensenada, BC · Remoto global" data-en="Ensenada, BC · Remote worldwide">Ensenada, BC · Remoto global</div>
+      </div>
+      <div class="cd">
+        <div class="cd-l" data-es="Disponibilidad" data-en="Availability">Disponibilidad</div>
+        <div class="cd-v"
+             data-es="Disponible para proyectos ahora"
+             data-en="Available for projects now">Disponible para proyectos ahora</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <span class="ft">&copy; 2026 Samantha Quintero &middot; Ensenada, BC</span>
-  <span class="ft" data-es="Diseno digital &middot; Marketing de performance" data-en="Digital design &middot; Performance marketing">Diseno digital &middot; Marketing de performance</span>
+  <span class="ft">© 2026 Samantha Quintero · Ensenada, BC</span>
+  <span class="ft"
+        data-es="Diseño digital · Marketing de performance"
+        data-en="Digital design · Performance marketing">
+    Diseño digital · Marketing de performance
+  </span>
 </footer>
+
+<!-- MODAL DE PROYECTOS — no edites esto -->
+<div id="project-modal"></div>
+
+<!-- SCRIPTS -->
 
 <script>
 // =========================================================
-// LANGUAGE SYSTEM
-// To translate a new element: add data-es="..." data-en="..."
-// The script handles everything automatically.
+// SISTEMA DE IDIOMAS — Samantha Quintero
+// Para traducir un elemento: agrega data-es="..." data-en="..."
 // =========================================================
-var lang = 'es';
+
+window.__lang = 'es';
 
 function setLang(l) {
-  if (l === lang) return;
-  lang = l;
+  if (l === window.__lang) return;
+  window.__lang = l;
+
   document.body.classList.add('switching');
+
   setTimeout(function() {
     document.documentElement.lang = l;
     document.querySelectorAll('[data-es]').forEach(function(el) {
@@ -403,50 +668,217 @@ function setLang(l) {
   }, 200);
 }
 
-// Auto-detect browser language on first load
-if ((navigator.language || '').startsWith('en')) setLang('en');
+// Auto-detectar idioma del navegador al cargar
+document.addEventListener('DOMContentLoaded', function() {
+  var browserLang = navigator.language || navigator.userLanguage || 'es';
+  if (browserLang.startsWith('en')) setLang('en');
+});
+
+// =========================================================
+// SISTEMA DE PROYECTOS — Samantha Quintero
+//
+// CÓMO AGREGAR UN PROYECTO:
+// 1. Agrega un objeto nuevo al array PROJECTS abajo
+// 2. En index.html, pon onclick="openProject('tu-id')" en el .wi
+// 3. Sube tus imágenes a la carpeta /img/
+// =========================================================
+
+var PROJECTS = {
+
+  corinthia: {
+    num: "01",
+    title_es: "Lead Gen · Corinthia Petite",
+    title_en: "Lead Gen · Corinthia Petite",
+    category_es: "Meta Ads · Diseño de piezas · WhatsApp",
+    category_en: "Meta Ads · Ad Design · WhatsApp",
+    year: "2026",
+
+    // MÉTRICAS — aparecen como stats grandes
+    stats: [
+      { num: "15×",   label_es: "Mensajes WhatsApp",  label_en: "WhatsApp messages" },
+      { num: "$700",  label_es: "Presupuesto MXN",    label_en: "MXN budget" },
+      { num: "9",     label_es: "Prospectos activos", label_en: "Active prospects" }
+    ],
+
+    // SECCIONES DE TEXTO — puedes poner todas las que quieras
+    sections: [
+      {
+        heading_es: "El reto",
+        heading_en: "The challenge",
+        body_es: "Corinthia Petite, una boutique de moda en Ensenada, recibía solo 1 mensaje semanal por WhatsApp a pesar de tener presencia en redes sociales. El objetivo era generar leads reales con un presupuesto mínimo.",
+        body_en: "Corinthia Petite, a fashion boutique in Ensenada, was receiving only 1 weekly WhatsApp message despite having social media presence. The goal was to generate real leads with a minimal budget."
+      },
+      {
+        heading_es: "Lo que hice",
+        heading_en: "What I did",
+        body_es: "Diseñé piezas visuales para Meta Ads enfocadas en el producto más atractivo de temporada. Configuré la campaña en Meta Ads Manager segmentando mujeres de 25–45 años en Ensenada y Tijuana. Optimicé el copy para dirigir tráfico directo a WhatsApp.",
+        body_en: "Designed visual assets for Meta Ads focused on the most attractive seasonal product. Set up the campaign in Meta Ads Manager targeting women aged 25–45 in Ensenada and Tijuana. Optimized copy to drive traffic directly to WhatsApp."
+      },
+      {
+        heading_es: "El resultado",
+        heading_en: "The result",
+        body_es: "Con $700 MXN de presupuesto total, los mensajes semanales pasaron de 1 a 15. 9 de esos prospectos continuaron la conversación y representaron oportunidades reales de venta — un retorno sobre inversión significativo para una campaña de arranque.",
+        body_en: "With a $700 MXN total budget, weekly messages went from 1 to 15. 9 of those prospects continued the conversation and represented real sales opportunities — a significant return on investment for a starter campaign."
+      }
+    ],
+
+    // IMÁGENES — pon las rutas a tus archivos en /img/
+    // Si no tienes imagen todavía, déjala como "" y no aparecerá
+    images: [
+      { src: "img/corinthia1.jpg", caption_es: "Anuncio principal · Feed de Instagram", caption_en: "Main ad · Instagram Feed" },
+      { src: "img/corinthia2.jpg", caption_es: "Variación Stories", caption_en: "Stories variation" },
+      { src: "img/corinthia3.jpg", caption_es: "Resultados del Ads Manager", caption_en: "Ads Manager results" }
+    ]
+  },
+
+  vermilion: {
+    num: "02",
+    title_es: "Contenido Social · Vermilion Media",
+    title_en: "Social Content · Vermilion Media",
+    category_es: "Facebook · Storytelling visual · Moda infantil",
+    category_en: "Facebook · Visual storytelling · Kids fashion",
+    year: "2026",
+
+    stats: [
+      { num: "29k+", label_es: "Views en Facebook",     label_en: "Facebook views" },
+      { num: "653%", label_es: "Crecimiento en alcance", label_en: "Reach growth" },
+      { num: "89%",  label_es: "Audiencia nueva",        label_en: "New audience" }
+    ],
+
+    sections: [
+      {
+        heading_es: "El reto",
+        heading_en: "The challenge",
+        body_es: "Vermilion Media necesitaba aumentar la visibilidad orgánica de una marca de moda infantil en Facebook. El contenido existente no generaba engagement ni alcance fuera de la base de seguidores actual.",
+        body_en: "Vermilion Media needed to increase organic visibility for a kids fashion brand on Facebook. Existing content wasn't generating engagement or reach beyond the current follower base."
+      },
+      {
+        heading_es: "Lo que hice",
+        heading_en: "What I did",
+        body_es: "Desarrollé una estrategia de contenido basada en storytelling visual: cada pieza contaba una historia antes de vender un producto. Diseñé formatos para feed y Reels optimizados para retención y compartidas.",
+        body_en: "Developed a content strategy based on visual storytelling: each piece told a story before selling a product. Designed formats for feed and Reels optimized for retention and shares."
+      },
+      {
+        heading_es: "El resultado",
+        heading_en: "The result",
+        body_es: "En menos de un mes: 29,000+ views, 653% de crecimiento en alcance y el 89% del nuevo público llegó desde fuera de los seguidores existentes — lo que indica una expansión real de la audiencia de marca.",
+        body_en: "In under a month: 29,000+ views, 653% reach growth, and 89% of new viewers came from outside existing followers — indicating real brand audience expansion."
+      }
+    ],
+
+    images: [
+      { src: "img/vermilion1.jpg", caption_es: "Pieza principal · Feed Facebook", caption_en: "Main post · Facebook Feed" },
+      { src: "img/vermilion2.jpg", caption_es: "Reel de producto", caption_en: "Product Reel" },
+      { src: "img/vermilion3.jpg", caption_es: "Métricas de alcance", caption_en: "Reach metrics" }
+    ]
+  },
+
+  email: {
+    num: "03",
+    title_es: "Email Marketing · Freelance",
+    title_en: "Email Marketing · Freelance",
+    category_es: "Segmentación · Canva · A/B Testing · Copy",
+    category_en: "Segmentation · Canva · A/B Testing · Copywriting",
+    year: "2025–26",
+
+    stats: [
+      { num: "A/B",  label_es: "Testing aplicado",   label_en: "Testing applied" },
+      { num: "3+",   label_es: "Segmentos creados",  label_en: "Segments created" },
+      { num: "↑CTR", label_es: "Tasa de clics",      label_en: "Click-through rate" }
+    ],
+
+    sections: [
+      {
+        heading_es: "El reto",
+        heading_en: "The challenge",
+        body_es: "Clientes remotos necesitaban secuencias de email que convirtieran, pero sus comunicaciones actuales tenían diseño genérico, copy sin estructura y cero segmentación de audiencia.",
+        body_en: "Remote clients needed converting email sequences, but their current communications had generic design, unstructured copy and zero audience segmentation."
+      },
+      {
+        heading_es: "Lo que hice",
+        heading_en: "What I did",
+        body_es: "Diseñé templates en Canva alineados a la identidad de cada marca. Segmenté las listas por ubicación, perfil demográfico e intereses. Escribí copy orientado a conversión con CTAs claros. Realicé A/B testing en asuntos y creativos para identificar las variaciones de mayor rendimiento.",
+        body_en: "Designed Canva templates aligned to each brand's identity. Segmented lists by location, demographics and interests. Wrote conversion-focused copy with clear CTAs. Ran A/B tests on subject lines and creatives to identify highest-performing variations."
+      }
+    ],
+
+    images: [
+      { src: "img/email1.jpg", caption_es: "Template de email · Cliente 1", caption_en: "Email template · Client 1" },
+      { src: "img/email2.jpg", caption_es: "Variación A/B · Asunto y header", caption_en: "A/B variation · Subject and header" }
+    ]
+  }
+
+};
+
+// =========================================================
+// MOTOR DEL MODAL — no necesitas editar esto
+// =========================================================
+
+var currentLang = window.__lang || 'es';
+
+function openProject(id) {
+  var p = PROJECTS[id];
+  if (!p) return;
+  currentLang = window.__lang || 'es';
+
+  var l = currentLang;
+
+  // -- Stats HTML
+  var statsHtml = p.stats.map(function(s) {
+    return '<div class="pm-stat"><div class="pm-stat-num">' + s.num + '</div><div class="pm-stat-label">' + (l === 'es' ? s.label_es : s.label_en) + '</div></div>';
+  }).join('');
+
+  // -- Sections HTML
+  var sectionsHtml = p.sections.map(function(s) {
+    return '<div class="pm-section"><h3 class="pm-heading">' + (l === 'es' ? s.heading_es : s.heading_en) + '</h3><p class="pm-body">' + (l === 'es' ? s.body_es : s.body_en) + '</p></div>';
+  }).join('');
+
+  // -- Images HTML (solo las que tienen src)
+  var imagesHtml = '';
+  var validImages = p.images ? p.images.filter(function(i){ return i.src && i.src !== ''; }) : [];
+  if (validImages.length > 0) {
+    imagesHtml = '<div class="pm-images">' + validImages.map(function(img, idx) {
+      return '<figure class="pm-fig">' +
+        '<div class="pm-img-wrap"><img src="' + img.src + '" alt="' + (l === 'es' ? img.caption_es : img.caption_en) + '" onerror="this.parentElement.style.display=\'none\'" /></div>' +
+        '<figcaption class="pm-caption">' + (l === 'es' ? img.caption_es : img.caption_en) + '</figcaption>' +
+        '</figure>';
+    }).join('') + '</div>';
+  }
+
+  var modal = document.getElementById('project-modal');
+  modal.innerHTML =
+    '<div class="pm-backdrop" onclick="closeProject()"></div>' +
+    '<div class="pm-panel">' +
+      '<button class="pm-close" onclick="closeProject()">&#x2715;</button>' +
+      '<div class="pm-inner">' +
+        '<div class="pm-top">' +
+          '<span class="pm-num">' + p.num + '</span>' +
+          '<span class="pm-year">' + p.year + '</span>' +
+        '</div>' +
+        '<h2 class="pm-title">' + (l === 'es' ? p.title_es : p.title_en) + '</h2>' +
+        '<p class="pm-cat">' + (l === 'es' ? p.category_es : p.category_en) + '</p>' +
+        '<div class="pm-stats">' + statsHtml + '</div>' +
+        imagesHtml +
+        '<div class="pm-sections">' + sectionsHtml + '</div>' +
+      '</div>' +
+    '</div>';
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProject() {
+  var modal = document.getElementById('project-modal');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Cerrar con Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeProject();
+});
+
 </script>
 
-  <script>
-
-const preview = document.getElementById("work-preview")
-const previewImg = document.getElementById("preview-image")
-
-document.querySelectorAll(".wi").forEach(item => {
-
-item.addEventListener("mouseenter", e => {
-
-if(item.innerText.includes("Corinthia")){
-previewImg.src="img/corinthia1.jpg"
-}
-
-if(item.innerText.includes("Vermilion")){
-previewImg.src="img/vermillion1.jpg"
-}
-
-if(item.innerText.includes("Email")){
-previewImg.src="img/email1.jpg"
-}
-
-preview.style.display="block"
-
-})
-
-item.addEventListener("mousemove", e => {
-
-preview.style.left = e.pageX + 20 + "px"
-preview.style.top = e.pageY + 20 + "px"
-
-})
-
-item.addEventListener("mouseleave", () => {
-
-preview.style.display="none"
-
-})
-
-})
-
-</script>
 </body>
-</html> 
+</html>
