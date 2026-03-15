@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -292,39 +291,82 @@ footer {
 .pm-stat-num   { font-family: var(--serif); font-size: 2rem; font-weight: 300; line-height: 1; }
 .pm-stat-label { font-size: .52rem; letter-spacing: .15em; text-transform: uppercase; color: var(--stone); margin-top: .4rem; }
 
-/* Imágenes */
-.pm-images {
-  display: flex; flex-direction: column; gap: 1.5rem;
+/* ---- CARRUSEL DE IMÁGENES ---- */
+.pm-carousel-wrap {
+  position: relative;
   margin-bottom: 3rem;
 }
-.pm-fig { display: flex; flex-direction: column; gap: .6rem; }
+.pm-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 1rem;
+  padding-bottom: .5rem;
+  scrollbar-width: none;
+}
+.pm-carousel::-webkit-scrollbar { display: none; }
+
+.pm-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
 .pm-img-wrap {
-  width: 100%; background: var(--sand);
-  border-radius: 4px; overflow: hidden;
-  min-height: 200px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--sand);
+  border-radius: 4px;
+  overflow: hidden;
   display: flex; align-items: center; justify-content: center;
+  position: relative;
 }
 .pm-img-wrap img {
-  width: 100%; height: auto;
+  width: 100%; height: 100%;
+  object-fit: cover;
   display: block;
   transition: transform .4s ease;
 }
-.pm-fig:hover .pm-img-wrap img { transform: scale(1.02); }
+.pm-slide:hover .pm-img-wrap img { transform: scale(1.02); }
+
+/* placeholder cuando no hay imagen */
+.pm-img-wrap.empty::after {
+  content: attr(data-label);
+  font-size: .58rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--taupe);
+  position: absolute;
+}
+
 .pm-caption {
   font-size: .58rem; letter-spacing: .12em;
   text-transform: uppercase; color: var(--stone);
 }
 
-/* Placeholder cuando no hay imagen */
-.pm-img-placeholder {
-  width: 100%; min-height: 220px;
-  background: var(--sand);
-  border-radius: 4px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .6rem; letter-spacing: .15em;
-  text-transform: uppercase; color: var(--taupe);
-  margin-bottom: 1.5rem;
+/* navegación flechas */
+.pm-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: .8rem;
 }
+.pm-nav-btn {
+  background: transparent; border: .5px solid var(--sand);
+  width: 32px; height: 32px; border-radius: 50%;
+  cursor: pointer; font-size: .8rem; color: var(--stone);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+  flex-shrink: 0;
+}
+.pm-nav-btn:hover { border-color: var(--black); color: var(--black); }
+.pm-dots {
+  display: flex; gap: 6px; align-items: center;
+}
+.pm-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--sand); transition: background .2s;
+  cursor: pointer;
+}
+.pm-dot.active { background: var(--black); }
 
 /* Secciones de texto */
 .pm-sections { display: flex; flex-direction: column; gap: 2.5rem; }
@@ -833,16 +875,35 @@ function openProject(id) {
     return '<div class="pm-section"><h3 class="pm-heading">' + (l === 'es' ? s.heading_es : s.heading_en) + '</h3><p class="pm-body">' + (l === 'es' ? s.body_es : s.body_en) + '</p></div>';
   }).join('');
 
-  // -- Images HTML (solo las que tienen src)
+  // -- Carrusel de imágenes
   var imagesHtml = '';
-  var validImages = p.images ? p.images.filter(function(i){ return i.src && i.src !== ''; }) : [];
-  if (validImages.length > 0) {
-    imagesHtml = '<div class="pm-images">' + validImages.map(function(img, idx) {
-      return '<figure class="pm-fig">' +
-        '<div class="pm-img-wrap"><img src="' + img.src + '" alt="' + (l === 'es' ? img.caption_es : img.caption_en) + '" onerror="this.parentElement.style.display=\'none\'" /></div>' +
-        '<figcaption class="pm-caption">' + (l === 'es' ? img.caption_es : img.caption_en) + '</figcaption>' +
-        '</figure>';
-    }).join('') + '</div>';
+  var allImages = p.images || [];
+  if (allImages.length > 0) {
+    var slidesHtml = allImages.map(function(img, idx) {
+      var cap = l === 'es' ? img.caption_es : img.caption_en;
+      var imgTag = img.src
+        ? '<img src="' + img.src + '" alt="' + cap + '" onerror="this.parentElement.classList.add(\'empty\');this.parentElement.setAttribute(\'data-label\',\'Imagen próximamente\');this.remove()" />'
+        : '';
+      var wrapClass = img.src ? 'pm-img-wrap' : 'pm-img-wrap empty';
+      var wrapLabel = img.src ? '' : ' data-label="Imagen próximamente"';
+      return '<div class="pm-slide" data-index="' + idx + '">' +
+        '<div class="' + wrapClass + '"' + wrapLabel + '>' + imgTag + '</div>' +
+        '<p class="pm-caption">' + String(idx + 1).padStart(2,'0') + ' / ' + String(allImages.length).padStart(2,'0') + ' &nbsp;·&nbsp; ' + cap + '</p>' +
+        '</div>';
+    }).join('');
+
+    var dotsHtml = allImages.map(function(_, idx) {
+      return '<div class="pm-dot' + (idx === 0 ? ' active' : '') + '" onclick="carouselGoTo(\'pm-car-' + id + '\',' + idx + ')"></div>';
+    }).join('');
+
+    imagesHtml = '<div class="pm-carousel-wrap">' +
+      '<div class="pm-carousel" id="pm-car-' + id + '">' + slidesHtml + '</div>' +
+      '<div class="pm-nav">' +
+        '<button class="pm-nav-btn" onclick="carouselPrev(\'pm-car-' + id + '\')" aria-label="anterior">&#8592;</button>' +
+        '<div class="pm-dots" id="pm-dots-' + id + '">' + dotsHtml + '</div>' +
+        '<button class="pm-nav-btn" onclick="carouselNext(\'pm-car-' + id + '\')" aria-label="siguiente">&#8594;</button>' +
+      '</div>' +
+    '</div>';
   }
 
   var modal = document.getElementById('project-modal');
@@ -872,6 +933,58 @@ function closeProject() {
   modal.classList.remove('open');
   document.body.style.overflow = '';
 }
+
+
+// =========================================================
+// CARRUSEL — navegación
+// =========================================================
+function carouselGoTo(carId, idx) {
+  var car = document.getElementById(carId);
+  if (!car) return;
+  var slide = car.querySelectorAll('.pm-slide')[idx];
+  if (slide) car.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+  updateDots(carId, idx);
+}
+
+function carouselPrev(carId) {
+  var car = document.getElementById(carId);
+  if (!car) return;
+  var slides = car.querySelectorAll('.pm-slide');
+  var idx = Math.round(car.scrollLeft / car.offsetWidth);
+  var prev = Math.max(0, idx - 1);
+  car.scrollTo({ left: slides[prev].offsetLeft, behavior: 'smooth' });
+  updateDots(carId, prev);
+}
+
+function carouselNext(carId) {
+  var car = document.getElementById(carId);
+  if (!car) return;
+  var slides = car.querySelectorAll('.pm-slide');
+  var idx = Math.round(car.scrollLeft / car.offsetWidth);
+  var next = Math.min(slides.length - 1, idx + 1);
+  car.scrollTo({ left: slides[next].offsetLeft, behavior: 'smooth' });
+  updateDots(carId, next);
+}
+
+function updateDots(carId, activeIdx) {
+  var projectId = carId.replace('pm-car-', '');
+  var dotsWrap = document.getElementById('pm-dots-' + projectId);
+  if (!dotsWrap) return;
+  dotsWrap.querySelectorAll('.pm-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === activeIdx);
+  });
+}
+
+// Actualizar dots al hacer scroll manual
+document.addEventListener('scroll', function() {}, true);
+setTimeout(function() {
+  document.querySelectorAll('.pm-carousel').forEach(function(car) {
+    car.addEventListener('scroll', function() {
+      var idx = Math.round(car.scrollLeft / car.offsetWidth);
+      updateDots(car.id, idx);
+    });
+  });
+}, 100);
 
 // Cerrar con Escape
 document.addEventListener('keydown', function(e) {
