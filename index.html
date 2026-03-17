@@ -86,13 +86,31 @@ nav {
   font-size: .72rem; letter-spacing: .2em;
   text-transform: uppercase; color: var(--stone); margin-bottom: 2.5rem;
 }
-.hero-title {
-  font-family: var(--serif);
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  font-weight: 600; line-height: 1.08;
-  margin-bottom: 2.5rem; max-width: 700px;
+.hero-title-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
-.hero-title em { font-style: italic; color: var(--taupe); }
+
+.hero-gif {
+  width: 180px;
+  height: auto;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+/* Para que no rompa en mobile */
+@media (max-width: 700px) {
+  .hero-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-gif {
+    width: 140px;
+    margin-top: 1rem;
+  }
+}
 .hero-body {
   font-size: 1rem; color: var(--stone);
   max-width: 360px; line-height: 2.1; letter-spacing: .04em;
