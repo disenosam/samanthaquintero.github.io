@@ -9,7 +9,6 @@
   <style>
 /* =========================================================
    SAMANTHA QUINTERO — Portfolio Styles
-   Para cambiar colores edita las variables en :root
 ========================================================= */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -86,44 +85,59 @@ nav {
   font-size: .72rem; letter-spacing: .2em;
   text-transform: uppercase; color: var(--stone); margin-bottom: 2.5rem;
 }
-.hero-title-row {
+
+/* ----- HERO LAYOUT CON GIF ----- */
+.hero-content-row {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: space-between;
+  gap: 4rem;
+  margin-bottom: 3rem;
 }
 
-/* Para que no rompa en mobile */
-@media (max-width: 700px) {
-  .hero-title-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
 
-  .hero-gif {
-    width: 140px;
-    margin-top: 1rem;
-  }
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.12;
+  margin-bottom: 2rem;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--taupe);
+}
+
+.hero-gif-wrap {
+  flex: 0 0 auto;
+  width: clamp(200px, 30vw, 380px);
 }
 
 .hero-gif {
-  width: 180px;
+  width: 100%;
   height: auto;
   border-radius: 10px;
   opacity: 0.9;
+  display: block;
 }
 
-/* Para que no rompa en mobile */
 @media (max-width: 700px) {
-  .hero-title-row {
+  .hero-content-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 2rem;
   }
-
-  .hero-gif {
-    width: 140px;
-    margin-top: 1rem;
+  .hero-gif-wrap {
+    width: 100%;
+    max-width: 320px;
   }
 }
+
 .hero-body {
   font-size: 1rem; color: var(--stone);
   max-width: 360px; line-height: 2.1; letter-spacing: .04em;
@@ -131,7 +145,7 @@ nav {
 .hero-row {
   display: flex; align-items: flex-end;
   justify-content: space-between;
-  margin-top: 5rem; gap: 2rem; flex-wrap: wrap;
+  margin-top: 2rem; gap: 2rem; flex-wrap: wrap;
 }
 .stats { display: flex; gap: 4rem; }
 .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; line-height: 1; }
@@ -184,7 +198,6 @@ nav {
 .wi:hover .wt  { color: var(--sand); }
 .wi:hover .wline { background: rgba(255,255,255,.12); }
 
-/* hint de "click para ver" */
 .wi::after {
   content: 'Ver proyecto →';
   position: absolute; bottom: 2rem; left: 2.5rem;
@@ -193,7 +206,6 @@ nav {
   transition: color .35s;
 }
 .wi:hover::after { color: var(--stone); }
-/* no mostrar hint en el placeholder */
 .wi.placeholder::after { display: none; }
 
 .wn   { font-size: .55rem; letter-spacing: .2em; color: var(--stone); font-weight: 300; transition: color .35s; }
@@ -311,7 +323,6 @@ footer {
   margin-bottom: 2.5rem;
 }
 
-/* Stats */
 .pm-stats {
   display: flex; gap: 0;
   border-top: .5px solid var(--sand);
@@ -326,7 +337,6 @@ footer {
 .pm-stat-num   { font-family: var(--serif); font-size: 2rem; font-weight: 600; line-height: 1; }
 .pm-stat-label { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--stone); margin-top: .4rem; }
 
-/* ---- CARRUSEL DE IMÁGENES ---- */
 .pm-carousel-wrap {
   position: relative;
   margin-bottom: 3rem;
@@ -366,7 +376,6 @@ footer {
 }
 .pm-slide:hover .pm-img-wrap img { transform: scale(1.02); }
 
-/* placeholder cuando no hay imagen */
 .pm-img-wrap.empty::after {
   content: attr(data-label);
   font-size: .58rem; letter-spacing: .18em;
@@ -379,7 +388,6 @@ footer {
   text-transform: uppercase; color: var(--stone);
 }
 
-/* navegación flechas */
 .pm-nav {
   display: flex; align-items: center; justify-content: space-between;
   margin-top: .8rem;
@@ -403,7 +411,6 @@ footer {
 }
 .pm-dot.active { background: var(--black); }
 
-/* Secciones de texto */
 .pm-sections { display: flex; flex-direction: column; gap: 2.5rem; }
 .pm-heading {
   font-size: .72rem; letter-spacing: .15em;
@@ -432,7 +439,6 @@ footer {
   .pm-close { padding: 1.2rem 1.5rem; }
   .pm-stats { flex-wrap: wrap; }
 }
-
 </style>
 </head>
 <body>
@@ -461,23 +467,26 @@ footer {
      data-en="Digital Design · Performance Campaigns · Ensenada, Mexico">
     Diseño digital · Campañas de performance · Ensenada, México
   </p>
- <div class="hero-title-row">
-  <h1 class="hero-title"
-      data-es="Campañas que<br>convierten <em>ideas</em><br>en resultados."
-      data-en="Campaigns that turn<br><em>ideas</em> into<br>real results.">
-    Campañas que<br>convierten <em>ideas</em><br>en resultados.
-  </h1>
 
-</div>
-  <div  <img src="para-hero.gif" alt="preview" class="hero-gif"> 
+  <div class="hero-content-row">
+    <div class="hero-text">
+      <h1 class="hero-title"
+          data-es="Campañas que<br>convierten <em>ideas</em><br>en resultados."
+          data-en="Campaigns that turn<br><em>ideas</em> into<br>real results.">
+        Campañas que<br>convierten <em>ideas</em><br>en resultados.
+      </h1>
+      <p class="hero-body"
+         data-es="Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales — no solo impresiones."
+         data-en="Graphic designer and digital marketing specialist. I create visual assets and paid campaigns that generate real leads — not just impressions.">
+        Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales — no solo impresiones.
+      </p>
     </div>
 
-  <p class="hero-body"
-     data-es="Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales — no solo impresiones."
-     data-en="Graphic designer and digital marketing specialist. I create visual assets and paid campaigns that generate real leads — not just impressions.">
-    Diseñadora gráfica y especialista en marketing digital. Creo activos visuales y campañas pagadas que generan leads reales — no solo impresiones.
-  </p>
-  
+    <div class="hero-gif-wrap">
+      <img src="para-hero.gif" alt="preview" class="hero-gif">
+    </div>
+  </div>
+
   <div class="hero-row">
     <a class="btn" href="#contacto"
        data-es="Trabajemos juntos" data-en="Let's work together">Trabajemos juntos</a>
@@ -496,7 +505,6 @@ footer {
       </div>
     </div>
   </div>
-  
 </section>
 
 <!-- TRABAJO -->
@@ -507,7 +515,6 @@ footer {
   </div>
   <div class="works">
 
-    <!-- PROYECTO 01 — onclick="openProject('corinthia')" abre el modal -->
     <div class="wi" onclick="openProject('corinthia')">
       <div>
         <div class="wn">01</div>
@@ -527,7 +534,6 @@ footer {
       <div class="wy">2026</div>
     </div>
 
-    <!-- PROYECTO 02 -->
     <div class="wi" onclick="openProject('vermilion')">
       <div>
         <div class="wn">02</div>
@@ -547,7 +553,6 @@ footer {
       <div class="wy">2026</div>
     </div>
 
-    <!-- PROYECTO 03 -->
     <div class="wi" onclick="openProject('email')">
       <div>
         <div class="wn">03</div>
@@ -567,38 +572,31 @@ footer {
       <div class="wy">2025–26</div>
     </div>
 
-    <!-- PROYECTO 04 -->
-<div class="wi" onclick="openProject('portfolio')">
-
-  <div>
-
-    <div class="wn">04</div>
-
-    <div class="wt"
-    data-es="Portfolio Personal · Samantha Quintero"
-    data-en="Personal Portfolio · Samantha Quintero">
-    Portfolio Personal · Samantha Quintero
-    </div>
-
-    <div class="wcat"
-    data-es="UX · Desarrollo Frontend · AI Assisted Workflow"
-    data-en="UX · Frontend Development · AI Assisted Workflow">
-    UX · Desarrollo Frontend · AI Assisted Workflow
-    </div>
-
-    <div class="wline"></div>
-
-    <div class="wd"
-    data-es="Diseño y desarrollo de un portfolio minimalista enfocado en mostrar proyectos de marketing digital, diseño y generación de leads. Construido con HTML, CSS y JavaScript. El proceso incluyó el uso de herramientas de inteligencia artificial para acelerar iteraciones de diseño, estructurar contenido y optimizar la experiencia del usuario."
-    data-en="Design and development of a minimalist portfolio focused on showcasing digital marketing, design and lead generation projects. Built with HTML, CSS and JavaScript. The process included the use of AI tools to accelerate design iterations, structure content and optimize the user experience.">
-    Diseño y desarrollo de un portfolio minimalista enfocado en mostrar proyectos de marketing digital, diseño y generación de leads. Construido con HTML, CSS y JavaScript. El proceso incluyó el uso de herramientas de inteligencia artificial para acelerar iteraciones de diseño, estructurar contenido y optimizar la experiencia del usuario.
+    <div class="wi" onclick="openProject('portfolio')">
+      <div>
+        <div class="wn">04</div>
+        <div class="wt"
+             data-es="Portfolio Personal · Samantha Quintero"
+             data-en="Personal Portfolio · Samantha Quintero">
+          Portfolio Personal · Samantha Quintero
+        </div>
+        <div class="wcat"
+             data-es="UX · Desarrollo Frontend · AI Assisted Workflow"
+             data-en="UX · Frontend Development · AI Assisted Workflow">
+          UX · Desarrollo Frontend · AI Assisted Workflow
+        </div>
+        <div class="wline"></div>
+        <div class="wd"
+             data-es="Diseño y desarrollo de un portfolio minimalista enfocado en mostrar proyectos de marketing digital, diseño y generación de leads. Construido con HTML, CSS y JavaScript. El proceso incluyó el uso de herramientas de inteligencia artificial para acelerar iteraciones de diseño, estructurar contenido y optimizar la experiencia del usuario."
+             data-en="Design and development of a minimalist portfolio focused on showcasing digital marketing, design and lead generation projects. Built with HTML, CSS and JavaScript. The process included the use of AI tools to accelerate design iterations, structure content and optimize the user experience.">
+          Diseño y desarrollo de un portfolio minimalista enfocado en mostrar proyectos de marketing digital, diseño y generación de leads. Construido con HTML, CSS y JavaScript. El proceso incluyó el uso de herramientas de inteligencia artificial para acelerar iteraciones de diseño, estructurar contenido y optimizar la experiencia del usuario.
+        </div>
+      </div>
+      <div class="wy">2026</div>
     </div>
 
   </div>
-
-  <div class="wy">2026</div>
-
-</div>
+</section>
 
 <!-- SOBRE MÍ -->
 <section id="sobre-mi" class="section">
@@ -735,25 +733,20 @@ footer {
   </span>
 </footer>
 
-<!-- MODAL DE PROYECTOS — no edites esto -->
+<!-- MODAL DE PROYECTOS -->
 <div id="project-modal"></div>
 
 <!-- SCRIPTS -->
-
 <script>
 // =========================================================
-// SISTEMA DE IDIOMAS — Samantha Quintero
-// Para traducir un elemento: agrega data-es="..." data-en="..."
+// SISTEMA DE IDIOMAS
 // =========================================================
-
 window.__lang = 'es';
 
 function setLang(l) {
   if (l === window.__lang) return;
   window.__lang = l;
-
   document.body.classList.add('switching');
-
   setTimeout(function() {
     document.documentElement.lang = l;
     document.querySelectorAll('[data-es]').forEach(function(el) {
@@ -766,21 +759,14 @@ function setLang(l) {
   }, 200);
 }
 
-// Auto-detectar idioma del navegador al cargar
 document.addEventListener('DOMContentLoaded', function() {
   var browserLang = navigator.language || navigator.userLanguage || 'es';
   if (browserLang.startsWith('en')) setLang('en');
 });
 
 // =========================================================
-// SISTEMA DE PROYECTOS — Samantha Quintero
-//
-// CÓMO AGREGAR UN PROYECTO:
-// 1. Agrega un objeto nuevo al array PROJECTS abajo
-// 2. En index.html, pon onclick="openProject('tu-id')" en el .wi
-// 3. Sube tus imágenes a la carpeta /img/
+// PROYECTOS
 // =========================================================
-
 var PROJECTS = {
 
   corinthia: {
@@ -790,15 +776,11 @@ var PROJECTS = {
     category_es: "Meta Ads · Diseño de piezas · WhatsApp",
     category_en: "Meta Ads · Ad Design · WhatsApp",
     year: "2026",
-
-    // MÉTRICAS — aparecen como stats grandes
     stats: [
       { num: "15×",   label_es: "Mensajes WhatsApp",  label_en: "WhatsApp messages" },
       { num: "$700",  label_es: "Presupuesto MXN",    label_en: "MXN budget" },
       { num: "9",     label_es: "Prospectos activos", label_en: "Active prospects" }
     ],
-
-    // SECCIONES DE TEXTO — puedes poner todas las que quieras
     sections: [
       {
         heading_es: "El reto",
@@ -819,11 +801,8 @@ var PROJECTS = {
         body_en: "With a $700 MXN total budget, weekly messages went from 1 to 15. 9 of those prospects continued the conversation and represented real sales opportunities — a significant return on investment for a starter campaign."
       }
     ],
-
-    // IMÁGENES — pon las rutas a tus archivos en /img/
-    // Si no tienes imagen todavía, déjala como "" y no aparecerá
     images: [
-{ src: "creatives.gif", caption_es: "Anuncios principales · Feed de Facebook", caption_en: "Main ads · Facebook Feed" },
+      { src: "creatives.gif", caption_es: "Anuncios principales · Feed de Facebook", caption_en: "Main ads · Facebook Feed" },
       { src: "campain.gif", caption_es: "Métricas de Meta Anuncios", caption_en: "Meta Ads Metrics" },
       { src: "mata-ads.gif", caption_es: "Resultados del Ads Manager", caption_en: "Ads Manager results" }
     ]
@@ -836,13 +815,11 @@ var PROJECTS = {
     category_es: "Facebook · Storytelling visual · Moda infantil",
     category_en: "Facebook · Visual storytelling · Kids fashion",
     year: "2026",
-
     stats: [
       { num: "29k+", label_es: "Views en Facebook",     label_en: "Facebook views" },
       { num: "653%", label_es: "Crecimiento en alcance", label_en: "Reach growth" },
       { num: "89%",  label_es: "Audiencia nueva",        label_en: "New audience" }
     ],
-
     sections: [
       {
         heading_es: "El reto",
@@ -863,7 +840,6 @@ var PROJECTS = {
         body_en: "In under a month: 29,000+ views, 653% reach growth, and 89% of new viewers came from outside existing followers — indicating real brand audience expansion."
       }
     ],
-
     images: [
       { src: "feed-facebook.gif", caption_es: "Pieza principal · Feed Facebook", caption_en: "Main post · Facebook Feed" },
       { src: "Copia de creatives.gif", caption_es: "Reel de producto", caption_en: "Product Reel" },
@@ -878,13 +854,11 @@ var PROJECTS = {
     category_es: "Segmentación · Canva · A/B Testing · Copy",
     category_en: "Segmentation · Canva · A/B Testing · Copywriting",
     year: "2025–26",
-
     stats: [
       { num: "A/B",  label_es: "Testing aplicado",   label_en: "Testing applied" },
       { num: "3+",   label_es: "Segmentos creados",  label_en: "Segments created" },
       { num: "↑CTR", label_es: "Tasa de clics",      label_en: "Click-through rate" }
     ],
-
     sections: [
       {
         heading_es: "El reto",
@@ -899,7 +873,6 @@ var PROJECTS = {
         body_en: "Designed Canva templates aligned to each brand's identity. Segmented lists by location, demographics and interests. Wrote conversion-focused copy with clear CTAs. Ran A/B tests on subject lines and creatives to identify highest-performing variations."
       }
     ],
-
     images: [
       { src: "img/email1.jpg", caption_es: "Template de email · Cliente 1", caption_en: "Email template · Client 1" },
       { src: "img/email2.jpg", caption_es: "Variación A/B · Asunto y header", caption_en: "A/B variation · Subject and header" }
@@ -909,29 +882,21 @@ var PROJECTS = {
 };
 
 // =========================================================
-// MOTOR DEL MODAL — no necesitas editar esto
+// MOTOR DEL MODAL
 // =========================================================
-
-var currentLang = window.__lang || 'es';
-
 function openProject(id) {
   var p = PROJECTS[id];
   if (!p) return;
-  currentLang = window.__lang || 'es';
+  var l = window.__lang || 'es';
 
-  var l = currentLang;
-
-  // -- Stats HTML
   var statsHtml = p.stats.map(function(s) {
     return '<div class="pm-stat"><div class="pm-stat-num">' + s.num + '</div><div class="pm-stat-label">' + (l === 'es' ? s.label_es : s.label_en) + '</div></div>';
   }).join('');
 
-  // -- Sections HTML
   var sectionsHtml = p.sections.map(function(s) {
     return '<div class="pm-section"><h3 class="pm-heading">' + (l === 'es' ? s.heading_es : s.heading_en) + '</h3><p class="pm-body">' + (l === 'es' ? s.body_es : s.body_en) + '</p></div>';
   }).join('');
 
-  // -- Carrusel de imágenes
   var imagesHtml = '';
   var allImages = p.images || [];
   if (allImages.length > 0) {
@@ -998,9 +963,8 @@ function closeProject() {
   document.body.style.overflow = '';
 }
 
-
 // =========================================================
-// CARRUSEL — navegación
+// CARRUSEL
 // =========================================================
 function carouselGoTo(carId, idx) {
   var car = document.getElementById(carId);
@@ -1039,8 +1003,6 @@ function updateDots(carId, activeIdx) {
   });
 }
 
-// Actualizar dots al hacer scroll manual
-document.addEventListener('scroll', function() {}, true);
 setTimeout(function() {
   document.querySelectorAll('.pm-carousel').forEach(function(car) {
     car.addEventListener('scroll', function() {
@@ -1050,11 +1012,9 @@ setTimeout(function() {
   });
 }, 100);
 
-// Cerrar con Escape
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeProject();
 });
-
 </script>
 
 </body>
